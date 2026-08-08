@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S.O.S Soluções - Dashboard Futurista Ulli Joias</title>
+    <title>S.O.S Soluções - Dashboard Ulli Joias</title>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --bg-dark: #080c14;
-            --card-bg: rgba(15, 23, 42, 0.75);
+            --card-bg: rgba(15, 23, 42, 0.85);
             --sos-blue: #00a8ff;
             --sos-blue-glow: rgba(0, 168, 255, 0.35);
             --sos-orange: #ff6b00;
@@ -21,7 +21,7 @@
 
         * {
             box-sizing: border-box;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
 
         body {
@@ -38,16 +38,16 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 980px;
             width: 100%;
         }
 
-        /* HEADER FUTURISTA COM LOGO */
+        /* HEADER INTEGRADO COM LOGO FUTURISTA */
         .header-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(15, 23, 42, 0.85);
+            background: var(--card-bg);
             border: 1px solid var(--sos-blue-glow);
             box-shadow: 0 0 20px var(--sos-blue-glow);
             backdrop-filter: blur(12px);
@@ -109,10 +109,10 @@
             color: var(--text-muted);
         }
 
-        /* KPI CARDS FUTURISTAS */
+        /* METRICAS PRINCIPAIS */
         .kpi-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 16px;
             margin-bottom: 25px;
         }
@@ -124,7 +124,6 @@
             padding: 16px 20px;
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(8px);
         }
 
         .kpi-card::before {
@@ -158,71 +157,102 @@
             margin-top: 4px;
         }
 
-        /* SEÇÃO DE GRÁFICOS DUAL */
-        .charts-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        @media (max-width: 850px) {
-            .charts-grid { grid-template-columns: 1fr; }
-        }
-
+        /* CAIXA DE GRÁFICO MENSAL */
         .chart-box {
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
             border-radius: 12px;
-            padding: 20px;
-            backdrop-filter: blur(8px);
+            padding: 22px;
+            margin-bottom: 25px;
         }
 
-        .chart-title {
-            font-size: 10pt;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: var(--sos-blue);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .chart-title::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--sos-orange);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--sos-orange);
-        }
-
-        /* ANÁLISE EM TEXTO */
         .section-title {
             font-size: 11pt;
             font-weight: 800;
-            color: #ffffff;
+            color: var(--sos-blue);
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .section-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(90deg, var(--sos-blue), transparent);
+        /* TABELA DE SERVIÇOS COM BARRAS DE PROGRESSO */
+        .table-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            overflow-x: auto;
         }
 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9.5pt;
+        }
+
+        th {
+            background: rgba(0, 168, 255, 0.1);
+            color: var(--sos-blue);
+            text-align: left;
+            padding: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 8pt;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid var(--sos-blue-glow);
+        }
+
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #cbd5e1;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.03);
+            color: #ffffff;
+        }
+
+        .progress-bar-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .progress-bar-bg {
+            flex: 1;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--sos-blue), var(--sos-orange));
+            border-radius: 10px;
+            box-shadow: 0 0 8px var(--sos-blue-glow);
+        }
+
+        .percent-text {
+            width: 45px;
+            text-align: right;
+            font-size: 8.5pt;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        /* TEXTO RESUMO DOS 7 MESES */
         .text-box {
             background: var(--card-bg);
             border: 1px solid var(--border-glow);
             border-radius: 12px;
-            padding: 20px 24px;
+            padding: 22px 26px;
             margin-bottom: 25px;
         }
 
@@ -241,14 +271,13 @@
             color: #ffffff;
         }
 
-        /* CARD DE OPORTUNIDADE FUTURISTA COM LARANJA S.O.S */
+        /* CARD DE OPORTUNIDADE */
         .opportunity-card {
-            background: linear-gradient(135deg, rgba(255, 107, 0, 0.12) 0%, rgba(15, 23, 42, 0.9) 100%);
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.15) 0%, rgba(15, 23, 42, 0.95) 100%);
             border: 1px solid var(--sos-orange);
-            box-shadow: 0 0 25px rgba(255, 107, 0, 0.2);
+            box-shadow: 0 0 25px rgba(255, 107, 0, 0.25);
             border-radius: 12px;
             padding: 22px 26px;
-            position: relative;
         }
 
         .opportunity-badge {
@@ -258,7 +287,7 @@
             font-size: 8pt;
             font-weight: 900;
             text-transform: uppercase;
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
             letter-spacing: 0.8px;
             margin-bottom: 12px;
@@ -279,11 +308,28 @@
             margin: 0;
         }
 
+        /* RODAPÉ COM FONTE DOS DADOS */
+        .system-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 168, 255, 0.1);
+            border: 1px solid var(--sos-blue-glow);
+            color: var(--sos-blue);
+            font-size: 8pt;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            margin-top: 25px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .footer {
             text-align: center;
             font-size: 8.5pt;
             color: var(--text-muted);
-            margin-top: 35px;
+            margin-top: 15px;
             padding-top: 15px;
             border-top: 1px solid var(--border-glow);
         }
@@ -297,7 +343,6 @@
     <div class="header-bar">
         <div class="brand-section">
             <div class="logo-box">
-                <!-- SVG Vetorial do Logo Futurista S.O.S -->
                 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
                     <path d="M2 17l10 5 10-5"></path>
@@ -315,7 +360,7 @@
         </div>
     </div>
 
-    <!-- CARDS DE METRICAS PRINCIPAIS -->
+    <!-- CARDS KPIS -->
     <div class="kpi-container">
         <div class="kpi-card">
             <div class="kpi-label">Período Analisado</div>
@@ -335,62 +380,224 @@
         </div>
     </div>
 
-    <!-- SEÇÃO DE GRÁFICOS FUTURISTAS -->
-    <div class="charts-grid">
-        <div class="chart-box">
-            <div class="chart-title">Evolução do Investimento (R$)</div>
-            <canvas id="barChart" height="200"></canvas>
-        </div>
-        <div class="chart-box">
-            <div class="chart-title">Mix de Serviços Prestados (%)</div>
-            <canvas id="donutChart" height="200"></canvas>
-        </div>
+    <!-- 1. GRÁFICO MENSAL -->
+    <div class="chart-box">
+        <div class="section-title">1. Evolução do Investimento Mensal (Jan a Jul / 2026)</div>
+        <canvas id="barChart" height="110"></canvas>
     </div>
 
-    <!-- ANÁLISE DOS 7 MESES EM TEXTO -->
-    <div class="section-title">Análise de Eficiência dos 7 Meses</div>
+    <!-- 2. TABELA DE SERVIÇOS COM BARRAS DE PROGRESSO -->
+    <div class="table-box">
+        <div class="section-title">2. Distribuição por Tipos de Serviços Prestados</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Serviço Prestado</th>
+                    <th>Volume (Qtd)</th>
+                    <th>Valor Total (R$)</th>
+                    <th style="width: 35%;">Participação (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Inspeção Clube S.O.S</td>
+                    <td>6.244</td>
+                    <td>R$ 4.370,80</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 31.6%;"></div></div>
+                            <span class="percent-text">31.6%</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Encarte Clube S.O.S</td>
+                    <td>4.969</td>
+                    <td>R$ 2.732,95</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 19.7%;"></div></div>
+                            <span class="percent-text">19.7%</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cadastro Externo</td>
+                    <td>626</td>
+                    <td>R$ 1.439,80</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 10.4%;"></div></div>
+                            <span class="percent-text">10.4%</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Emissão e Impressão de Etiquetas</td>
+                    <td>4.799</td>
+                    <td>R$ 1.295,73</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 9.4%;"></div></div>
+                            <span class="percent-text">9.4%</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Montagem / Montagem 2025</td>
+                    <td>3.182</td>
+                    <td>R$ 1.243,65</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 9.0%;"></div></div>
+                            <span class="percent-text">9.0%</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Fotografia Clube S.O.S</td>
+                    <td>649</td>
+                    <td>R$ 1.226,61</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 8.9%;"></div></div>
+                            <span class="percent-text">8.9%</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Combo Completo 2025</td>
+                    <td>848</td>
+                    <td>R$ 1.009,12</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 7.3%;"></div></div>
+                            <span class="percent-text">7.3%</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Inspeção Veneziana</td>
+                    <td>691</td>
+                    <td>R$ 241,85</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 1.7%;"></div></div>
+                            <span class="percent-text">1.7%</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cravação Clube S.O.S</td>
+                    <td>160</td>
+                    <td>R$ 112,00</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 0.8%;"></div></div>
+                            <span class="percent-text">0.8%</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cadastro Reposição Clube S.O.S</td>
+                    <td>220</td>
+                    <td>R$ 110,00</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 0.8%;"></div></div>
+                            <span class="percent-text">0.8%</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lixa e Acabamento</td>
+                    <td>60</td>
+                    <td>R$ 48,00</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 0.3%;"></div></div>
+                            <span class="percent-text">0.3%</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Embalagens (Caixa M)</td>
+                    <td>1</td>
+                    <td>R$ 12,00</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 0.1%;"></div></div>
+                            <span class="percent-text">0.1%</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Defeitos 2025</td>
+                    <td>7</td>
+                    <td>R$ 1,68</td>
+                    <td>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 0.05%;"></div></div>
+                            <span class="percent-text">0.0%</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr style="font-weight: bold; background: rgba(0, 168, 255, 0.15); color: #ffffff;">
+                    <td>TOTAL CONSOLIDADO ACUMULADO</td>
+                    <td>22.456</td>
+                    <td style="color: var(--sos-orange);">R$ 13.844,19</td>
+                    <td>100.0%</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- 3. RESUMO EM TEXTO -->
+    <div class="section-title" style="color: #ffffff;">3. Resumo de Eficiência Operacional (7 Meses)</div>
     <div class="text-box">
         <ul class="highlight-list">
             <li>
-                <strong>Média Mês &amp; Alto Rendimento:</strong> O investimento médio mensal mantido pela Ulli Joias fixou-se em apenas <strong>R$ 1.977,74 por mês</strong>[cite: 10]. Trata-se de um valor extremamente enxuto considerando que cobriu o tratamento técnico completo de <strong>22.456 peças</strong> com um custo acumulado de R$ 13.844,19[cite: 10].
+                <strong>Média Mês &amp; Eficiência Orçamentária:</strong> A Ulli Joias registrou uma média mensal gasta de apenas <strong>R$ 1.977,74 por mês</strong>. Um valor extremamente reduzido para a quantidade de entregas, viabilizando a gestão de <strong>22.456 peças</strong> com um custo total acumulado de R$ 13.844,19.
             </li>
             <li>
-                <strong>Picos de Desempenho Operacional:</strong> Os meses mais fortes do período foram <strong>Março (R$ 3.118,60 | 5.212 peças)</strong> e <strong>Julho (R$ 2.872,33 | 4.386 peças)</strong>[cite: 10], demonstrando momentos em que a tração e a demanda atingiram a capacidade máxima de produção[cite: 10].
+                <strong>Picos de Desempenho Operacional:</strong> Os meses mais expressivos em volume e orçamento foram <strong>Março (R$ 3.118,60 | 5.212 peças)</strong> e <strong>Julho (R$ 2.872,33 | 4.386 peças)</strong>, demonstrando momentos de tração máxima da operação.
             </li>
             <li>
-                <strong>Pilares de Serviços Extraídos:</strong> A operação concentrou-se principalmente em <strong>Inspeção Técnica</strong> (6.244 peças | R$ 4.370,80)[cite: 10], <strong>Encartes</strong> (4.969 peças | R$ 2.732,95)[cite: 10] e <strong>Etiquetas</strong> (4.799 peças | R$ 1.295,73)[cite: 10], além de produção constante de Fotografias de Catálogo e Montagem[cite: 10].
+                <strong>Serviços Extraídos:</strong> A operação foi impulsionada pelos serviços de <strong>Inspeção Técnica</strong> (R$ 4.370,80), <strong>Encartes</strong> (R$ 2.732,95) e <strong>Etiquetas</strong> (R$ 1.295,73), mantendo ainda o fluxo contínuo de fotografia de catálogo e montagens.
             </li>
         </ul>
     </div>
 
-    <!-- A OPORTUNIDADE DO CONTRATO ANUAL (AJUSTADO) -->
+    <!-- 4. A OPORTUNIDADE -->
     <div class="opportunity-card">
-        <span class="opportunity-badge">Oportunidade Exclusiva</span>
+        <span class="opportunity-badge">Oportunidade Estratégica</span>
         <div class="opportunity-title">Renovação do Contrato Anual (Apenas 18 Vagas)</div>
         <p class="opportunity-text">
-            A janela oficial para adesão e renovação do <strong>Contrato Anual S.O.S Soluções</strong> inicia-se entre <strong>Outubro e Novembro</strong>[cite: 10], permanecendo aberta com vendas até no máximo <strong>Janeiro/2027</strong> — ou <strong>enquanto durar o limite estrito de 18 vagas</strong>.
+            A janela oficial para adesão e renovação do <strong>Contrato Anual S.O.S Soluções</strong> inicia-se entre <strong>Outubro e Novembro</strong>. As vendas permanecerão abertas até no máximo <strong>Janeiro/2027</strong> — ou <strong>enquanto durarem as 18 vagas exclusivas disponíveis</strong>.
             <br><br>
-            <strong>Benefício de Congelamento:</strong> Os parceiros que garantirem vaga nesta janela terão <strong>TODOS OS PREÇOS DE TABELA INTEGRALMENTE MANTIDOS</strong> sem qualquer reajuste para o próximo ciclo[cite: 10] (com exceção única do serviço de Encarte, que passará de R$ 0,55 para R$ 0,65 por peça)[cite: 10]. É a garantia de prioridade total na fila de produção e controle de custos.
+            <strong>Condições Especiais:</strong> Os parceiros que garantirem a vaga nessa janela terão <strong>TODOS OS PREÇOS DE TABELA INTEGRALMENTE MANTIDOS</strong> sem qualquer reajuste para o próximo ano (com exceção exclusiva do serviço de Encarte, que passará de R$ 0,55 para R$ 0,65 por peça). É a oportunidade de congelar os custos e garantir prioridade de produção.
         </p>
     </div>
 
+    <!-- RODAPÉ E ORIGEM DOS DADOS -->
+    <div style="text-align: center;">
+        <div class="system-tag">
+            <span>⚡</span> Informações extraídas do Sistema S.O.S de Operações de Setores
+        </div>
+    </div>
+
     <div class="footer">
-        S.O.S Soluções em Semijoias © 2026 — Inteligência &amp; Performance Operacional (Ulli Joias)[cite: 10]
+        S.O.S Soluções em Semijoias © 2026 — Inteligência &amp; Performance Operacional (Ulli Joias)
     </div>
 
 </div>
 
-<!-- INICIALIZAÇÃO DOS GRÁFICOS CHART.JS -->
+<!-- INICIALIZAÇÃO DO GRÁFICO MENSAL -->
 <script>
-    // Configurações de cores da paleta S.O.S
-    const sosBlue = '#00a8ff';
-    const sosOrange = '#ff6b00';
-    const textMuted = '#94a3b8';
-
-    // 1. Gráfico de Barras - Investimento Mensal
     const ctxBar = document.getElementById('barChart').getContext('2d');
     
-    // Gradiente Futurista para as barras
     const blueGradient = ctxBar.createLinearGradient(0, 0, 0, 200);
     blueGradient.addColorStop(0, 'rgba(0, 168, 255, 0.9)');
     blueGradient.addColorStop(1, 'rgba(0, 168, 255, 0.2)');
@@ -398,60 +605,27 @@
     new Chart(ctxBar, {
         type: 'bar',
         data: {
-            labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'],
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'],
             datasets: [{
                 label: 'Investimento (R$)',
                 data: [1169.20, 1801.33, 3118.60, 2670.12, 1296.95, 2210.06, 2872.33],
                 backgroundColor: blueGradient,
-                borderColor: sosBlue,
+                borderColor: '#00a8ff',
                 borderWidth: 1.5,
                 borderRadius: 6,
-                hoverBackgroundColor: sosOrange
+                hoverBackgroundColor: '#ff6b00'
             }]
         },
         options: {
             responsive: true,
             plugins: { legend: { display: false } },
             scales: {
-                x: { grid: { display: false }, ticks: { color: textMuted } },
+                x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
                 y: { 
                     grid: { color: 'rgba(255, 255, 255, 0.05)' }, 
-                    ticks: { color: textMuted, callback: v => 'R$' + v } 
+                    ticks: { color: '#94a3b8', callback: v => 'R$' + v } 
                 }
             }
-        }
-    });
-
-    // 2. Gráfico de Rosca - Mix de Serviços
-    const ctxDonut = document.getElementById('donutChart').getContext('2d');
-    new Chart(ctxDonut, {
-        type: 'doughnut',
-        data: {
-            labels: ['Inspeção', 'Encarte', 'Cadastro', 'Etiquetas', 'Montagem', 'Fotografia', 'Outros'],
-            datasets: [{
-                data: [31.6, 19.7, 10.4, 9.4, 9.0, 8.9, 11.0],
-                backgroundColor: [
-                    '#00a8ff',
-                    '#ff6b00',
-                    '#00d2d3',
-                    '#ff9f43',
-                    '#5f27cd',
-                    '#54a0ff',
-                    '#334155'
-                ],
-                borderWidth: 2,
-                borderColor: '#0b0f19'
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'right',
-                    labels: { color: '#cbd5e1', font: { size: 10 } }
-                }
-            },
-            cutout: '70%'
         }
     });
 </script>

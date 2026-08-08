@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.O.S Soluções - Relatório Histórico Ulli Joias</title>
+    <!-- Chart.js para Renderização de Gráficos no GitHub / Browser -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #0f172a;      /* Slate 900 */
+            --primary-light: #1e293b;
+            --accent: #2563eb;       /* Royal Blue */
+            --accent-soft: #eff6ff;  /* Soft Blue BG */
+            --text-dark: #0f172a;
+            --text-main: #334155;    /* Slate 700 */
+            --border-color: #cbd5e1;
+            --bg-light: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--text-main);
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* HEADER INTEGRADO COM LOGO EMBUTIDO */
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 8px;
+            color: #ffffff;
+            margin-bottom: 24px;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-box {
+            width: 46px;
+            height: 46px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .company-name {
+            font-size: 13pt;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .company-sub {
+            font-size: 8pt;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        .report-meta {
+            text-align: right;
+        }
+
+        .report-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: #38bdf8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .report-sub {
+            font-size: 8.5pt;
+            color: #cbd5e1;
+            margin-top: 2px;
+        }
+
+        /* METRICAS CONSOLIDADAS */
+        .kpi-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .kpi-card {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 12px;
+        }
+
+        .kpi-label {
+            font-size: 7.5pt;
+            text-transform: uppercase;
+            color: #64748b;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+        }
+
+        .kpi-value {
+            font-size: 13pt;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-top: 2px;
+        }
+
+        .section-title {
+            font-size: 11pt;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 6px;
+            margin-top: 24px;
+            margin-bottom: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        .chart-box {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        /* TABELAS ESTILIZADAS */
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 24px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9.5pt;
+        }
+
+        th {
+            background-color: var(--primary);
+            color: #ffffff;
+            text-align: left;
+            padding: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 8pt;
+        }
+
+        td {
+            padding: 9px 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--bg-light);
+        }
+
+        /* HIGHLIGHT BOX */
+        .highlight-box {
+            background-color: var(--bg-light);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-list {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        .highlight-list li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        /* OPORTUNIDADE */
+        .opportunity-card {
+            background-color: var(--accent-soft);
+            border: 1.5px solid #bfdbfe;
+            border-left: 5px solid var(--accent);
+            border-radius: 6px;
+            padding: 16px 20px;
+            margin-top: 20px;
+        }
+
+        .opportunity-title {
+            font-size: 11pt;
+            font-weight: 800;
+            color: #1e40af;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-color);
+            font-size: 8pt;
+            color: #94a3b8;
+            text-align: center;
+        }
+
+        @media print {
+            body { padding: 0; background: #fff; }
+            .container { border: none; box-shadow: none; max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- CABEÇALHO INTEGRADO COM LOGO -->
+    <div class="header-bar">
+        <div class="brand-section">
+            <div class="logo-box">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                    <path d="M2 17l10 5 10-5"></path>
+                    <path d="M2 12l10 5 10-5"></path>
+                </svg>
+            </div>
+            <div>
+                <div class="company-name">S.O.S Soluções em Semijoias</div>
+                <div class="company-sub">Gestão Técnica &amp; Apoio Operacional</div>
+            </div>
+        </div>
+        <div class="report-meta">
+            <div class="report-title">Relatório Comercial</div>
+            <div class="report-sub">Cliente: Ulli Joias | Jan a Jul/2026</div>
+        </div>
+    </div>
+
+    <!-- METRICAS CONSOLIDADAS -->
+    <div class="kpi-container">
+        <div class="kpi-card">
+            <div class="kpi-label">Período Analisado</div>
+            <div class="kpi-value">7 Meses</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Volume de Operações</div>
+            <div class="kpi-value">22.456 <span style="font-size: 8pt; font-weight: 400; color: #64748b;">peças</span></div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Investimento Total</div>
+            <div class="kpi-value">R$ 13.844,19</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-label">Média Mês Gasta</div>
+            <div class="kpi-value">R$ 1.977,74</div>
+        </div>
+    </div>
+
+    <!-- GRÁFICO DE EVOLUÇÃO MENSAL -->
+    <div class="section-title">1. Evolução do Investimento Mensal (Jan a Jul / 2026)</div>
+    <div class="chart-box">
+        <canvas id="investimentoChart" height="110"></canvas>
+    </div>
+
+    <!-- TABELA DE SERVIÇOS -->
+    <div class="section-title">2. Distribuição por Tipos de Serviços Prestados</div>
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th>Serviço Prestado</th>
+                    <th>Volume (Qtd)</th>
+                    <th>Valor Total (R$)</th>
+                    <th>Participação (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Inspeção Clube S.O.S</td><td>6.244</td><td>R$ 4.370,80</td><td>31,6%</td></tr>
+                <tr><td>Encarte Clube S.O.S</td><td>4.969</td><td>R$ 2.732,95</td><td>19,7%</td></tr>
+                <tr><td>Cadastro Externo</td><td>626</td><td>R$ 1.439,80</td><td>10,4%</td></tr>
+                <tr><td>Emissão e Impressão de Etiquetas</td><td>4.799</td><td>R$ 1.295,73</td><td>9,4%</td></tr>
+                <tr><td>Montagem / Montagem 2025</td><td>3.182</td><td>R$ 1.243,65</td><td>9,0%</td></tr>
+                <tr><td>Fotografia Clube S.O.S</td><td>649</td><td>R$ 1.226,61</td><td>8,9%</td></tr>
+                <tr><td>Combo Completo 2025</td><td>848</td><td>R$ 1.009,12</td><td>7,3%</td></tr>
+                <tr><td>Inspeção Veneziana</td><td>691</td><td>R$ 241,85</td><td>1,7%</td></tr>
+                <tr><td>Cravação Clube S.O.S</td><td>160</td><td>R$ 112,00</td><td>0,8%</td></tr>
+                <tr><td>Cadastro Reposição Clube S.O.S</td><td>220</td><td>R$ 110,00</td><td>0,8%</td></tr>
+                <tr><td>Lixa e Acabamento</td><td>60</td><td>R$ 48,00</td><td>0,3%</td></tr>
+                <tr><td>Embalagens (Caixa M)</td><td>1</td><td>R$ 12,00</td><td>0,1%</td></tr>
+                <tr><td>Defeitos 2025</td><td>7</td><td>R$ 1,68</td><td>0,0%</td></tr>
+            </tbody>
+            <tfoot>
+                <tr style="font-weight: bold; background-color: #e2e8f0;">
+                    <td>TOTAL CONSOLIDADO ACUMULADO</td>
+                    <td>22.456</td>
+                    <td>R$ 13.844,19</td>
+                    <td>100,0%</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <!-- RESUMO DOS 7 MESES EM TEXTO -->
+    <div class="section-title">3. Análise de Desempenho e Eficiência Operacional</div>
+    <div class="highlight-box">
+        <ul class="highlight-list">
+            <li>
+                <strong>Média Mês e Baixo Investimento:</strong> Com uma média mensal mantida em apenas <strong>R$ 1.977,74 por mês</strong>[cite: 10], a Ulli Joias atinge um nível de eficiência altíssimo, cobrindo 22.456 peças tratadas tecnicamente com um orçamento global de apenas R$ 13.844,19[cite: 10].
+            </li>
+            <li>
+                <strong>Os Melhores Meses de Desempenho:</strong> Os destaques de maior volume e faturamento operacional foram os meses de <strong>Março (R$ 3.118,60 | 5.212 peças)</strong> e <strong>Julho (R$ 2.872,33 | 4.386 peças)</strong>[cite: 10], registrando os maiores picos de demanda processados pela equipe[cite: 10].
+            </li>
+            <li>
+                <strong>Serviços Extraídos com Eficiência:</strong> A operação esteve fortemente amparada nos pilares de <strong>Inspeções</strong> (R$ 4.370,80)[cite: 10], <strong>Encartes</strong> (R$ 2.732,95)[cite: 10] e <strong>Etiquetas</strong> (R$ 1.295,73)[cite: 10], além de um fluxo constante de Fotografia de Catálogo e Montagens[cite: 10].
+            </li>
+        </ul>
+    </div>
+
+    <!-- A OPORTUNIDADE (Apenas após o resumo) -->
+    <div class="section-title">4. A Oportunidade Estratégica</div>
+    <div class="opportunity-card">
+        <div class="opportunity-title">
+            <span>◆</span> Oportunidade: Janela de Contrato Anual (Outubro &amp; Novembro)
+        </div>
+        <p style="margin-top: 0; margin-bottom: 8px;">
+            No período de <strong>Outubro e Novembro</strong> abriremos a janela oficial de renovação do <strong>Contrato Anual S.O.S Soluções</strong>[cite: 10].
+        </p>
+        <p style="margin: 0;">
+            <strong>Condições Especiais de Renovação:</strong> Para os parceiros que garantirem a vaga nesse período, <strong>TODOS OS PREÇOS DE TABELA SERÃO INTEGRALMENTE MANTIDOS</strong> sem reajuste para o próximo ano[cite: 10], com exceção exclusiva do serviço de Encarte, que passará de R$ 0,55 para R$ 0,65 por peça[cite: 10]. É a oportunidade de congelar os custos operacionais[cite: 10].
+        </p>
+    </div>
+
+    <div class="footer-note">
+        S.O.S Soluções em Semijoias © 2026 — Relatório Comercial e Apresentação de Performance (Ulli Joias)[cite: 10]
+    </div>
+
+</div>
+
+<!-- SCRIPT DO GRÁFICO CHART.JS -->
+<script>
+    const ctx = document.getElementById('investimentoChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'],
+            datasets: [{
+                label: 'Investimento Total (R$)',
+                data: [1169.20, 1801.33, 3118.60, 2670.12, 1296.95, 2210.06, 2872.33],
+                backgroundColor: 'rgba(37, 99, 235, 0.85)',
+                borderColor: '#2563eb',
+                borderWidth: 1,
+                borderRadius: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) { return 'R$ ' + value; }
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -3,632 +3,249 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S.O.S Soluções - Dashboard Ulli Joias</title>
+    <title>Relatório de Performance - S.O.S Soluções</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
+        
         :root {
-            --bg-dark: #080c14;
-            --card-bg: rgba(15, 23, 42, 0.85);
-            --sos-blue: #00a8ff;
-            --sos-blue-glow: rgba(0, 168, 255, 0.35);
-            --sos-orange: #ff6b00;
-            --sos-orange-glow: rgba(255, 107, 0, 0.4);
-            --text-light: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-glow: rgba(255, 255, 255, 0.1);
-        }
-
-        * {
-            box-sizing: border-box;
-            transition: all 0.25s ease;
+            --sos-orange: #ff5722;
+            --sos-orange-glow: rgba(255, 87, 34, 0.25);
+            --sos-blue: #2563eb;
+            --sos-blue-light: #3b82f6;
         }
 
         body {
-            font-family: 'Segoe UI', Roboto, -apple-system, sans-serif;
-            background-color: var(--bg-dark);
-            background-image: 
-                radial-gradient(circle at 10% 10%, rgba(0, 168, 255, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(255, 107, 0, 0.08) 0%, transparent 40%);
-            color: var(--text-light);
-            margin: 0;
-            padding: 30px 20px;
-            display: flex;
-            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 40%, #fff7ed 100%);
+            min-height: 100vh;
+            color: #0f172a;
         }
 
-        .container {
-            max-width: 980px;
-            width: 100%;
+        /* Card Futurista Claro com Glassmorphism e detalhes nas cores S.O.S */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.06), 0 8px 16px -6px rgba(255, 87, 34, 0.05);
+            border-radius: 16px;
         }
 
-        /* HEADER INTEGRADO COM LOGO FUTURISTA */
-        .header-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--card-bg);
-            border: 1px solid var(--sos-blue-glow);
-            box-shadow: 0 0 20px var(--sos-blue-glow);
-            backdrop-filter: blur(12px);
-            border-radius: 12px;
-            padding: 20px 28px;
-            margin-bottom: 25px;
+        /* Bordas de destaque em Laranja e Azul */
+        .border-glow-orange {
+            border-top: 4px solid var(--sos-orange);
         }
 
-        .brand-section {
-            display: flex;
-            align-items: center;
-            gap: 16px;
+        .border-glow-blue {
+            border-top: 4px solid var(--sos-blue);
         }
 
-        .logo-box {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, rgba(0,168,255,0.2) 0%, rgba(255,107,0,0.2) 100%);
-            border: 1.5px solid var(--sos-orange);
-            box-shadow: 0 0 15px var(--sos-orange-glow);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        /* Gradientes da Marca */
+        .header-gradient {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-bottom: 4px solid var(--sos-orange);
         }
 
-        .company-name {
-            font-size: 14pt;
-            font-weight: 900;
-            letter-spacing: 1px;
-            background: linear-gradient(90deg, #ffffff, var(--sos-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-        }
-
-        .company-sub {
-            font-size: 8.5pt;
-            color: var(--sos-orange);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .report-meta {
-            text-align: right;
-        }
-
-        .report-title {
-            font-size: 11pt;
-            font-weight: 800;
-            color: var(--sos-blue);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-
-        .report-sub {
-            font-size: 8.5pt;
-            color: var(--text-muted);
-        }
-
-        /* METRICAS PRINCIPAIS */
-        .kpi-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 25px;
-        }
-
-        .kpi-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 10px;
-            padding: 16px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .kpi-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--sos-blue);
-            box-shadow: 0 0 10px var(--sos-blue);
-        }
-
-        .kpi-card.orange-accent::before {
-            background: var(--sos-orange);
-            box-shadow: 0 0 10px var(--sos-orange);
-        }
-
-        .kpi-label {
-            font-size: 8pt;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .kpi-value {
-            font-size: 15pt;
-            font-weight: 800;
-            color: #ffffff;
-            margin-top: 4px;
-        }
-
-        /* CAIXA DE GRÁFICO MENSAL */
-        .chart-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 12px;
-            padding: 22px;
-            margin-bottom: 25px;
-        }
-
-        .section-title {
-            font-size: 11pt;
-            font-weight: 800;
-            color: var(--sos-blue);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* TABELA DE SERVIÇOS COM BARRAS DE PROGRESSO */
-        .table-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 25px;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 9.5pt;
-        }
-
-        th {
-            background: rgba(0, 168, 255, 0.1);
-            color: var(--sos-blue);
-            text-align: left;
-            padding: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 8pt;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid var(--sos-blue-glow);
-        }
-
-        td {
-            padding: 10px 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            color: #cbd5e1;
-        }
-
-        tr:hover td {
-            background: rgba(255, 255, 255, 0.03);
-            color: #ffffff;
-        }
-
-        .progress-bar-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-        }
-
-        .progress-bar-bg {
-            flex: 1;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--sos-blue), var(--sos-orange));
-            border-radius: 10px;
-            box-shadow: 0 0 8px var(--sos-blue-glow);
-        }
-
-        .percent-text {
-            width: 45px;
-            text-align: right;
-            font-size: 8.5pt;
-            font-weight: 700;
-            color: #ffffff;
-        }
-
-        /* TEXTO RESUMO DOS 7 MESES */
-        .text-box {
-            background: var(--card-bg);
-            border: 1px solid var(--border-glow);
-            border-radius: 12px;
-            padding: 22px 26px;
-            margin-bottom: 25px;
-        }
-
-        .highlight-list {
-            margin: 0;
-            padding-left: 20px;
-        }
-
-        .highlight-list li {
-            margin-bottom: 12px;
-            line-height: 1.6;
-            color: #cbd5e1;
-        }
-
-        .highlight-list strong {
-            color: #ffffff;
-        }
-
-        /* CARD DE OPORTUNIDADE */
-        .opportunity-card {
-            background: linear-gradient(135deg, rgba(255, 107, 0, 0.15) 0%, rgba(15, 23, 42, 0.95) 100%);
-            border: 1px solid var(--sos-orange);
-            box-shadow: 0 0 25px rgba(255, 107, 0, 0.25);
-            border-radius: 12px;
-            padding: 22px 26px;
-        }
-
-        .opportunity-badge {
-            display: inline-block;
-            background: var(--sos-orange);
-            color: #ffffff;
-            font-size: 8pt;
-            font-weight: 900;
-            text-transform: uppercase;
-            padding: 4px 12px;
-            border-radius: 20px;
-            letter-spacing: 0.8px;
-            margin-bottom: 12px;
-            box-shadow: 0 0 10px var(--sos-orange-glow);
-        }
-
-        .opportunity-title {
-            font-size: 12pt;
-            font-weight: 800;
-            color: #ffffff;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .opportunity-text {
-            color: #e2e8f0;
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* RODAPÉ COM FONTE DOS DADOS */
-        .system-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(0, 168, 255, 0.1);
-            border: 1px solid var(--sos-blue-glow);
-            color: var(--sos-blue);
-            font-size: 8pt;
-            font-weight: 700;
-            padding: 6px 14px;
-            border-radius: 20px;
-            margin-top: 25px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .footer {
-            text-align: center;
-            font-size: 8.5pt;
-            color: var(--text-muted);
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border-glow);
+        .badge-orange {
+            background: linear-gradient(135deg, #ff5722 0%, #f97316 100%);
+            box-shadow: 0 4px 12px rgba(255, 87, 34, 0.3);
         }
     </style>
 </head>
-<body>
+<body class="p-4 md:p-8">
 
-<div class="container">
+    <div class="max-w-6xl mx-auto space-y-6">
 
-    <!-- CABEÇALHO FUTURISTA -->
-    <div class="header-bar">
-        <div class="brand-section">
-            <div class="logo-box">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff6b00" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                    <path d="M2 17l10 5 10-5"></path>
-                    <path d="M2 12l10 5 10-5"></path>
-                </svg>
+        <!-- CABEÇALHO FUTURISTA COM LOGO INTEGRADO -->
+        <header class="header-gradient rounded-2xl p-6 text-white shadow-xl flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden">
+            <!-- Efeito Glow de Fundo -->
+            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute -left-10 -top-10 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"></div>
+
+            <div class="flex items-center gap-5 z-10">
+                <!-- LOGO S.O.S SOLUÇÕES -->
+                <!-- Para usar sua imagem do logo, basta colocar a imagem na mesma pasta e mudar o src abaixo para 'logo.png' -->
+                <div class="w-16 h-16 rounded-2xl bg-white p-2 flex items-center justify-center shadow-lg border border-orange-200">
+                    <img src="logo.png" alt="S.O.S Soluções" class="max-h-full max-w-full object-contain" onerror="this.onerror=null; this.src='https://i.imgur.com/v8N9u1L.png';">
+                </div>
+                
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-black tracking-wider uppercase text-white">S.O.S SOLUÇÕES</h1>
+                    <p class="text-xs font-extrabold tracking-widest text-orange-400 uppercase mt-0.5">Tecnologia & Apoio Operacional em Semijoias</p>
+                </div>
             </div>
-            <div>
-                <div class="company-name">S.O.S Soluções</div>
-                <div class="company-sub">Tecnologia &amp; Apoio Operacional</div>
+
+            <div class="text-center md:text-right z-10">
+                <span class="inline-block px-3.5 py-1 badge-orange rounded-full text-xs font-black text-white uppercase tracking-wider mb-1">Relatório de Performance</span>
+                <p class="text-sm font-semibold text-slate-300">Cliente: <strong class="text-white" id="client-name">Ulli Joias</strong> | Jan a Jul/2026</p>
+            </div>
+        </header>
+
+        <!-- CARDS DE MÉTRICAS (KPIs) NAS CORES DO EXCEL -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="glass-card p-4 border-glow-blue">
+                <p class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Período Analisado</p>
+                <p class="text-xl md:text-2xl font-black text-slate-900 mt-1">7 Meses</p>
+            </div>
+            <div class="glass-card p-4 border-glow-orange">
+                <p class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Volume Processado</p>
+                <p class="text-xl md:text-2xl font-black text-orange-600 mt-1">22.456 <span class="text-xs font-bold text-slate-500">peças</span></p>
+            </div>
+            <div class="glass-card p-4 border-glow-blue">
+                <p class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Investimento Total</p>
+                <p class="text-xl md:text-2xl font-black text-blue-600 mt-1">R$ 13.844,19</p>
+            </div>
+            <div class="glass-card p-4 border-glow-orange">
+                <p class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Média Mês Gasta</p>
+                <p class="text-xl md:text-2xl font-black text-slate-900 mt-1">R$ 1.977,74</p>
             </div>
         </div>
-        <div class="report-meta">
-            <div class="report-title">Relatório de Performance</div>
-            <div class="report-sub">Cliente: Ulli Joias | Jan a Jul/2026</div>
+
+        <!-- GRÁFICO MENSAL COM BARRAS GRADIENTES LARANJA/AZUL -->
+        <div class="glass-card p-6">
+            <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3">
+                <h2 class="text-base font-extrabold uppercase tracking-wide text-slate-800 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-orange-500 inline-block shadow-sm"></span>
+                    1. Evolução do Investimento Mensal (Jan a Jul / 2026)
+                </h2>
+            </div>
+            <div class="h-64 md:h-80 relative">
+                <canvas id="monthlyChart"></canvas>
+            </div>
         </div>
-    </div>
 
-    <!-- CARDS KPIS -->
-    <div class="kpi-container">
-        <div class="kpi-card">
-            <div class="kpi-label">Período Analisado</div>
-            <div class="kpi-value">7 Meses</div>
+        <!-- TABELA ESTILIZADA NAS CORES DO EXCEL (CABEÇALHO LARANJA & DESTAQUES AZUIS) -->
+        <div class="glass-card p-6">
+            <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3">
+                <h2 class="text-base font-extrabold uppercase tracking-wide text-slate-800 flex items-center gap-2">
+                    <span class="w-3 h-3 rounded-full bg-blue-600 inline-block shadow-sm"></span>
+                    2. Distribuição por Tipos de Serviços Prestados
+                </h2>
+            </div>
+            
+            <div class="overflow-x-auto rounded-xl border border-slate-200/80 shadow-sm">
+                <table class="w-full text-left text-sm">
+                    <thead>
+                        <!-- Cabeçalho em Laranja S.O.S (como no seu Excel) -->
+                        <tr class="bg-gradient-to-r from-orange-500 to-orange-600 text-white uppercase text-xs font-black tracking-wider">
+                            <th class="py-3.5 px-4">Serviço Prestado</th>
+                            <th class="py-3.5 px-4 text-right">Volume (Qtd)</th>
+                            <th class="py-3.5 px-4 text-right">Valor Total (R$)</th>
+                            <th class="py-3.5 px-4 text-right">Participação (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-semibold text-slate-700 bg-white/60">
+                        <tr class="hover:bg-orange-50/50 transition">
+                            <td class="py-3 px-4 font-bold text-slate-900">Inspeção Clube S.O.S</td>
+                            <td class="py-3 px-4 text-right font-extrabold">6.244</td>
+                            <td class="py-3 px-4 text-right">R$ 4.370,80</td>
+                            <td class="py-3 px-4 text-right font-black text-blue-600">31,6%</td>
+                        </tr>
+                        <tr class="hover:bg-orange-50/50 transition">
+                            <td class="py-3 px-4 font-bold text-slate-900">Encarte Clube S.O.S</td>
+                            <td class="py-3 px-4 text-right font-extrabold">4.969</td>
+                            <td class="py-3 px-4 text-right">R$ 2.732,95</td>
+                            <td class="py-3 px-4 text-right font-black text-blue-600">19,7%</td>
+                        </tr>
+                        <tr class="hover:bg-orange-50/50 transition">
+                            <td class="py-3 px-4 font-bold text-slate-900">Cadastro Externo</td>
+                            <td class="py-3 px-4 text-right font-extrabold">626</td>
+                            <td class="py-3 px-4 text-right">R$ 1.439,80</td>
+                            <td class="py-3 px-4 text-right font-black text-blue-600">10,4%</td>
+                        </tr>
+                        <tr class="hover:bg-orange-50/50 transition">
+                            <td class="py-3 px-4 font-bold text-slate-900">Emissão e Impressão de Etiquetas</td>
+                            <td class="py-3 px-4 text-right font-extrabold">4.799</td>
+                            <td class="py-3 px-4 text-right">R$ 1.295,73</td>
+                            <td class="py-3 px-4 text-right font-black text-blue-600">9,4%</td>
+                        </tr>
+                        <tr class="hover:bg-orange-50/50 transition">
+                            <td class="py-3 px-4 font-bold text-slate-900">Montagem / Montagem 2025</td>
+                            <td class="py-3 px-4 text-right font-extrabold">3.182</td>
+                            <td class="py-3 px-4 text-right">R$ 1.243,65</td>
+                            <td class="py-3 px-4 text-right font-black text-blue-600">9,0%</td>
+                        </tr>
+                        <tr class="hover:bg-orange-50/50 transition">
+                            <td class="py-3 px-4 font-bold text-slate-900">Fotografia Clube S.O.S</td>
+                            <td class="py-3 px-4 text-right font-extrabold">649</td>
+                            <td class="py-3 px-4 text-right">R$ 1.226,61</td>
+                            <td class="py-3 px-4 text-right font-black text-blue-600">8,9%</td>
+                        </tr>
+                    </tbody>
+                    <!-- Rodapé da tabela Azul (como a linha de Totais do Excel) -->
+                    <tfoot>
+                        <tr class="bg-blue-600 text-white font-black text-xs uppercase">
+                            <td class="py-3 px-4">Total Consolidado Acumulado</td>
+                            <td class="py-3 px-4 text-right">22.456</td>
+                            <td class="py-3 px-4 text-right">R$ 13.844,19</td>
+                            <td class="py-3 px-4 text-right">100,0%</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
-        <div class="kpi-card orange-accent">
-            <div class="kpi-label">Volume Processado</div>
-            <div class="kpi-value">22.456 <span style="font-size: 9pt; font-weight: 400; color: #94a3b8;">peças</span></div>
-        </div>
-        <div class="kpi-card">
-            <div class="kpi-label">Investimento Total</div>
-            <div class="kpi-value">R$ 13.844,19</div>
-        </div>
-        <div class="kpi-card orange-accent">
-            <div class="kpi-label">Média Mês Gasta</div>
-            <div class="kpi-value">R$ 1.977,74</div>
-        </div>
+
+        <!-- RODAPÉ -->
+        <footer class="text-center text-xs font-bold text-slate-400 py-4">
+            S.O.S Soluções em Semijoias © 2026 — Relatório Comercial de Performance
+        </footer>
+
     </div>
 
-    <!-- 1. GRÁFICO MENSAL -->
-    <div class="chart-box">
-        <div class="section-title">1. Evolução do Investimento Mensal (Jan a Jul / 2026)</div>
-        <canvas id="barChart" height="110"></canvas>
-    </div>
+    <!-- SCRIPT DO GRÁFICO (BARRAS EM GRADIENTE AZUL COM BORDAS LARANJA) -->
+    <script>
+        const ctx = document.getElementById('monthlyChart').getContext('2d');
+        
+        // Gradiente Laranja/Azul S.O.S
+        const gradientBlue = ctx.createLinearGradient(0, 0, 0, 300);
+        gradientBlue.addColorStop(0, '#2563eb');
+        gradientBlue.addColorStop(1, '#3b82f6');
 
-    <!-- 2. TABELA DE SERVIÇOS COM BARRAS DE PROGRESSO -->
-    <div class="table-box">
-        <div class="section-title">2. Distribuição por Tipos de Serviços Prestados</div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Serviço Prestado</th>
-                    <th>Volume (Qtd)</th>
-                    <th>Valor Total (R$)</th>
-                    <th style="width: 35%;">Participação (%)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Inspeção Clube S.O.S</td>
-                    <td>6.244</td>
-                    <td>R$ 4.370,80</td>
-                    <td>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 31.6%;"></div></div>
-                            <span class="percent-text">31.6%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Encarte Clube S.O.S</td>
-                    <td>4.969</td>
-                    <td>R$ 2.732,95</td>
-                    <td>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 19.7%;"></div></div>
-                            <span class="percent-text">19.7%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Cadastro Externo</td>
-                    <td>626</td>
-                    <td>R$ 1.439,80</td>
-                    <td>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 10.4%;"></div></div>
-                            <span class="percent-text">10.4%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Emissão e Impressão de Etiquetas</td>
-                    <td>4.799</td>
-                    <td>R$ 1.295,73</td>
-                    <td>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 9.4%;"></div></div>
-                            <span class="percent-text">9.4%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Montagem / Montagem 2025</td>
-                    <td>3.182</td>
-                    <td>R$ 1.243,65</td>
-                    <td>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 9.0%;"></div></div>
-                            <span class="percent-text">9.0%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Fotografia Clube S.O.S</td>
-                    <td>649</td>
-                    <td>R$ 1.226,61</td>
-                    <td>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 8.9%;"></div></div>
-                            <span class="percent-text">8.9%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Combo Completo 2025</td>
-                    <td>848</td>
-                    <td>R$ 1.009,12</td>
-                    <td>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 7.3%;"></div></div>
-                            <span class="percent-text">7.3%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Inspeção Veneziana</td>
-                    <td>691</td>
-                    <td>R$ 241,85</td>
-                    <td>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 1.7%;"></div></div>
-                            <span class="percent-text">1.7%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Cravação Clube S.O.S</td>
-                    <td>160</td>
-                    <td>R$ 112,00</td>
-                    <td>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 0.8%;"></div></div>
-                            <span class="percent-text">0.8%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Cadastro Reposição Clube S.O.S</td>
-                    <td>220</td>
-                    <td>R$ 110,00</td>
-                    <td>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 0.8%;"></div></div>
-                            <span class="percent-text">0.8%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Lixa e Acabamento</td>
-                    <td>60</td>
-                    <td>R$ 48,00</td>
-                    <td>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 0.3%;"></div></div>
-                            <span class="percent-text">0.3%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Embalagens (Caixa M)</td>
-                    <td>1</td>
-                    <td>R$ 12,00</td>
-                    <td>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 0.1%;"></div></div>
-                            <span class="percent-text">0.1%</span>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Defeitos 2025</td>
-                    <td>7</td>
-                    <td>R$ 1,68</td>
-                    <td>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 0.05%;"></div></div>
-                            <span class="percent-text">0.0%</span>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr style="font-weight: bold; background: rgba(0, 168, 255, 0.15); color: #ffffff;">
-                    <td>TOTAL CONSOLIDADO ACUMULADO</td>
-                    <td>22.456</td>
-                    <td style="color: var(--sos-orange);">R$ 13.844,19</td>
-                    <td>100.0%</td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-
-    <!-- 3. RESUMO EM TEXTO -->
-    <div class="section-title" style="color: #ffffff;">3. Resumo de Eficiência Operacional (7 Meses)</div>
-    <div class="text-box">
-        <ul class="highlight-list">
-            <li>
-                <strong>Média Mês &amp; Eficiência Orçamentária:</strong> A Ulli Joias registrou uma média mensal gasta de apenas <strong>R$ 1.977,74 por mês</strong>. Um valor extremamente reduzido para a quantidade de entregas, viabilizando a gestão de <strong>22.456 peças</strong> com um custo total acumulado de R$ 13.844,19.
-            </li>
-            <li>
-                <strong>Picos de Desempenho Operacional:</strong> Os meses mais expressivos em volume e orçamento foram <strong>Março (R$ 3.118,60 | 5.212 peças)</strong> e <strong>Julho (R$ 2.872,33 | 4.386 peças)</strong>, demonstrando momentos de tração máxima da operação.
-            </li>
-            <li>
-                <strong>Serviços Extraídos:</strong> A operação foi impulsionada pelos serviços de <strong>Inspeção Técnica</strong> (R$ 4.370,80), <strong>Encartes</strong> (R$ 2.732,95) e <strong>Etiquetas</strong> (R$ 1.295,73), mantendo ainda o fluxo contínuo de fotografia de catálogo e montagens.
-            </li>
-        </ul>
-    </div>
-
-    <!-- 4. A OPORTUNIDADE -->
-    <div class="opportunity-card">
-        <span class="opportunity-badge">Oportunidade Estratégica</span>
-        <div class="opportunity-title">Renovação do Contrato Anual (Apenas 18 Vagas)</div>
-        <p class="opportunity-text">
-            A janela oficial para adesão e renovação do <strong>Contrato Anual S.O.S Soluções</strong> inicia-se entre <strong>Outubro e Novembro</strong>. As vendas permanecerão abertas até no máximo <strong>Janeiro/2027</strong> — ou <strong>enquanto durarem as 18 vagas exclusivas disponíveis</strong>.
-            <br><br>
-            <strong>Condições Especiais:</strong> Os parceiros que garantirem a vaga nessa janela terão <strong>TODOS OS PREÇOS DE TABELA INTEGRALMENTE MANTIDOS</strong> sem qualquer reajuste para o próximo ano (com exceção exclusiva do serviço de Encarte, que passará de R$ 0,55 para R$ 0,65 por peça). É a oportunidade de congelar os custos e garantir prioridade de produção.
-        </p>
-    </div>
-
-    <!-- RODAPÉ E ORIGEM DOS DADOS -->
-    <div style="text-align: center;">
-        <div class="system-tag">
-            <span>⚡</span> Informações extraídas do Sistema S.O.S de Operações de Setores
-        </div>
-    </div>
-
-    <div class="footer">
-        S.O.S Soluções em Semijoias © 2026 — Inteligência &amp; Performance Operacional (Ulli Joias)
-    </div>
-
-</div>
-
-<!-- INICIALIZAÇÃO DO GRÁFICO MENSAL -->
-<script>
-    const ctxBar = document.getElementById('barChart').getContext('2d');
-    
-    const blueGradient = ctxBar.createLinearGradient(0, 0, 0, 200);
-    blueGradient.addColorStop(0, 'rgba(0, 168, 255, 0.9)');
-    blueGradient.addColorStop(1, 'rgba(0, 168, 255, 0.2)');
-
-    new Chart(ctxBar, {
-        type: 'bar',
-        data: {
-            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'],
-            datasets: [{
-                label: 'Investimento (R$)',
-                data: [1169.20, 1801.33, 3118.60, 2670.12, 1296.95, 2210.06, 2872.33],
-                backgroundColor: blueGradient,
-                borderColor: '#00a8ff',
-                borderWidth: 1.5,
-                borderRadius: 6,
-                hoverBackgroundColor: '#ff6b00'
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: { legend: { display: false } },
-            scales: {
-                x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
-                y: { 
-                    grid: { color: 'rgba(255, 255, 255, 0.05)' }, 
-                    ticks: { color: '#94a3b8', callback: v => 'R$' + v } 
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'],
+                datasets: [{
+                    label: 'Investimento (R$)',
+                    data: [1169.20, 1801.33, 3118.60, 2670.12, 1296.95, 2210.06, 2872.33],
+                    backgroundColor: gradientBlue,
+                    hoverBackgroundColor: '#ff5722',
+                    borderRadius: 8,
+                    borderSkipped: false,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#0f172a',
+                        titleFont: { family: 'Plus Jakarta Sans', weight: 'bold' },
+                        bodyFont: { family: 'Plus Jakarta Sans', weight: 'bold' },
+                        borderColor: '#ff5722',
+                        borderWidth: 1,
+                        padding: 12,
+                        displayColors: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(226, 232, 240, 0.8)' },
+                        ticks: { color: '#64748b', font: { family: 'Plus Jakarta Sans', weight: '700' } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#1e293b', font: { family: 'Plus Jakarta Sans', weight: '800' } }
+                    }
                 }
             }
-        }
-    });
-</script>
-
+        });
+    </script>
 </body>
 </html>

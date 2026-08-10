@@ -34,6 +34,7 @@
 
         .border-glow-orange { border-top: 4px solid var(--sos-orange); }
         .border-glow-blue { border-top: 4px solid var(--sos-blue); }
+        .border-glow-green { border-top: 4px solid #10b981; }
 
         .header-gradient {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
@@ -50,13 +51,12 @@
 
     <div class="max-w-6xl mx-auto space-y-6">
 
-        <!-- CABEÇALHO -->
+        <!-- CABEÇALHO COM LOGO CLUBE S.O.S VETORIAL -->
         <header class="header-gradient rounded-2xl p-6 text-white shadow-xl flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden">
             <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl"></div>
             <div class="absolute -left-10 -top-10 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"></div>
 
             <div class="flex items-center gap-5 z-10">
-                <!-- LOGO CLUBE S.O.S VETORIAL -->
                 <div class="w-20 h-20 rounded-2xl bg-white p-2 flex items-center justify-center shadow-lg border border-orange-200 shrink-0">
                     <svg viewBox="0 0 120 120" class="w-full h-full">
                         <circle cx="60" cy="36" r="24" fill="none" stroke="#f38b68" stroke-width="3" />
@@ -135,7 +135,6 @@
                         </tr>
                     </thead>
                     <tbody id="tabela-body" class="divide-y divide-slate-100 font-semibold text-slate-700 bg-white/60">
-                        <!-- Preenchido via JavaScript -->
                     </tbody>
                     <tfoot>
                         <tr class="bg-blue-600 text-white font-black text-xs uppercase">
@@ -149,26 +148,66 @@
             </div>
         </div>
 
-        <footer class="text-center text-xs font-bold text-slate-400 py-4">
+        <!-- SEÇÃO "A MAIS" NO FIM DA PÁGINA: DESCONTOS & ECONOMIA -->
+        <div id="secao-descontos" class="space-y-6 pt-6 hidden">
+            <div class="border-t-2 border-dashed border-slate-300 my-8"></div>
+
+            <div class="flex items-center justify-between">
+                <h2 class="text-lg md:text-xl font-black text-slate-900 uppercase tracking-wide flex items-center gap-2">
+                    <span class="w-3.5 h-3.5 rounded-full bg-emerald-500 inline-block shadow-sm"></span>
+                    3. Demonstrativo Adicional: Parceria & Economia Comercial
+                </h2>
+            </div>
+
+            <!-- CARDS DE RESUMO DO DESCONTO -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="glass-card p-5 border-glow-blue">
+                    <p class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Valor Bruto (Tabela)</p>
+                    <p class="text-2xl font-black text-slate-800 mt-1" id="desc-bruto">-</p>
+                    <p class="text-xs text-slate-400 mt-1 font-semibold">Sem condições especiais</p>
+                </div>
+                <div class="glass-card p-5 border-glow-green">
+                    <p class="text-xs font-extrabold uppercase tracking-wider text-emerald-600">Valor com Descontos</p>
+                    <p class="text-2xl font-black text-emerald-600 mt-1" id="desc-liquido">-</p>
+                    <p class="text-xs text-emerald-600/80 mt-1 font-semibold">Valor final aplicado</p>
+                </div>
+                <div class="glass-card p-5 border-glow-orange bg-gradient-to-br from-orange-500/10 to-amber-500/10">
+                    <p class="text-xs font-extrabold uppercase tracking-wider text-orange-600">Economia Gerada</p>
+                    <p class="text-2xl font-black text-orange-600 mt-1" id="desc-economia">-</p>
+                    <p class="text-xs text-orange-600/80 mt-1 font-bold">Maio (25%), Junho e Julho (30%)</p>
+                </div>
+            </div>
+
+            <!-- GRÁFICO COMPARATIVO BRUTO VS LÍQUIDO -->
+            <div class="glass-card p-6">
+                <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3">
+                    <h3 class="text-base font-extrabold uppercase tracking-wide text-slate-800">
+                        Comparativo Mensal: Investimento Bruto vs Faturado Líquido (R$)
+                    </h3>
+                </div>
+                <div class="h-64 md:h-80 relative">
+                    <canvas id="discountChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center text-xs font-bold text-slate-400 py-6">
             S.O.S Soluções em Semijoias © 2026 — Relatório Comercial de Performance
         </footer>
 
     </div>
 
-    <!-- SCRIPT DE CARREGAMENTO DINÂMICO DOS DADOS DA PASTA DADOS/ -->
+    <!-- SCRIPT DE CARREGAMENTO DINÂMICO -->
     <script>
-        // Pega o nome do cliente pela URL (Ex: ?cliente=ulli-joias)
         const urlParams = new URLSearchParams(window.location.search);
         const clienteParam = urlParams.get('cliente') || 'ulli-joias';
 
-        // Puxa o arquivo JSON correspondente da pasta dados/
         fetch(`dados/${clienteParam}.json`)
             .then(response => {
                 if (!response.ok) throw new Error("Cliente não encontrado");
                 return response.json();
             })
             .then(data => {
-                // Atualiza Cabeçalho e KPIs
                 document.getElementById('client-name').textContent = data.cliente;
                 document.getElementById('client-period').textContent = data.periodo;
                 document.getElementById('kpi-pecas').innerHTML = `${data.kpis.totalPecas} <span class="text-xs font-bold text-slate-500">itens</span>`;
@@ -176,7 +215,6 @@
                 document.getElementById('kpi-investimento').textContent = data.kpis.investimentoTotal;
                 document.getElementById('kpi-media').textContent = data.kpis.mediaMensal;
 
-                // Preenche a Tabela
                 const tbody = document.getElementById('tabela-body');
                 tbody.innerHTML = '';
                 data.tabela.forEach(item => {
@@ -194,12 +232,20 @@
                 document.getElementById('total-qtd-servicos').textContent = data.kpis.totalServicos;
                 document.getElementById('total-valor-servicos').textContent = data.kpis.investimentoTotal;
 
-                // Renderiza o Gráfico Mensal
                 renderChart(data.mensal);
+
+                // EXIBE E RENDERIZA A SEÇÃO DE DESCONTOS APENAS SE EXISTIR NO JSON DO CLIENTE
+                if (data.mensalDesconto && data.resumoDesconto) {
+                    document.getElementById('secao-descontos').classList.remove('hidden');
+                    document.getElementById('desc-bruto').textContent = data.resumoDesconto.valorBruto;
+                    document.getElementById('desc-liquido').textContent = data.resumoDesconto.valorLiquido;
+                    document.getElementById('desc-economia').textContent = data.resumoDesconto.economiaTotal;
+                    renderDiscountChart(data.mensal, data.mensalDesconto);
+                }
             })
             .catch(error => {
-                console.error("Erro ao carregar dados:", error);
-                document.getElementById('client-name').textContent = "Erro ao carregar dados do cliente.";
+                console.error("Erro:", error);
+                document.getElementById('client-name').textContent = "Erro ao carregar dados.";
             });
 
         function renderChart(dadosMensais) {
@@ -216,36 +262,51 @@
                         label: 'Investimento (R$)',
                         data: dadosMensais,
                         backgroundColor: gradientBlue,
-                        hoverBackgroundColor: '#f38b68',
                         borderRadius: 8,
-                        borderSkipped: false,
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            backgroundColor: '#0f172a',
-                            titleFont: { family: 'Plus Jakarta Sans', weight: 'bold' },
-                            bodyFont: { family: 'Plus Jakarta Sans', weight: 'bold' },
-                            borderColor: '#f38b68',
-                            borderWidth: 1,
-                            padding: 12,
-                            displayColors: false
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: 'rgba(226, 232, 240, 0.8)' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        function renderDiscountChart(bruto, liquido) {
+            const ctx = document.getElementById('discountChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio (-25%)', 'Junho (-30%)', 'Julho (-30%)'],
+                    datasets: [
+                        {
+                            label: 'Valor Bruto (Tabela)',
+                            data: bruto,
+                            backgroundColor: '#94a3b8',
+                            borderRadius: 6,
+                        },
+                        {
+                            label: 'Valor com Desconto',
+                            data: liquido,
+                            backgroundColor: '#10b981',
+                            borderRadius: 6,
                         }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top', labels: { font: { family: 'Plus Jakarta Sans', weight: 'bold' } } }
                     },
                     scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: 'rgba(226, 232, 240, 0.8)' },
-                            ticks: { color: '#64748b', font: { family: 'Plus Jakarta Sans', weight: '700' } }
-                        },
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: '#1e293b', font: { family: 'Plus Jakarta Sans', weight: '800' } }
-                        }
+                        y: { beginAtZero: true },
+                        x: { grid: { display: false } }
                     }
                 }
             });

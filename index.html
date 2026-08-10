@@ -25,7 +25,7 @@
             color: #0f172a;
         }
 
-        /* Card Futurista Claro com Glassmorphism e detalhes nas cores S.O.S */
+        /* Card Futurista Claro com Glassmorphism */
         .glass-card {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
@@ -62,15 +62,14 @@
 
         <!-- CABEÇALHO FUTURISTA COM LOGO INTEGRADO -->
         <header class="header-gradient rounded-2xl p-6 text-white shadow-xl flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden">
-            <!-- Efeito Glow de Fundo -->
+            <!-- Efeitos de Fundo Glow -->
             <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl"></div>
             <div class="absolute -left-10 -top-10 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"></div>
 
             <div class="flex items-center gap-5 z-10">
                 <!-- LOGO S.O.S SOLUÇÕES -->
-                <!-- Para usar sua imagem do logo, basta colocar a imagem na mesma pasta e mudar o src abaixo para 'logo.png' -->
-                <div class="w-16 h-16 rounded-2xl bg-white p-2 flex items-center justify-center shadow-lg border border-orange-200">
-                    <img src="logo.png" alt="S.O.S Soluções" class="max-h-full max-w-full object-contain" onerror="this.onerror=null; this.src='https://i.imgur.com/v8N9u1L.png';">
+                <div class="w-16 h-16 rounded-2xl bg-white p-2 flex items-center justify-center shadow-lg border border-orange-200 shrink-0">
+                    <img src="LOGO LIX.png" alt="S.O.S Soluções em Semijoias" class="max-h-full max-w-full object-contain">
                 </div>
                 
                 <div>
@@ -85,7 +84,7 @@
             </div>
         </header>
 
-        <!-- CARDS DE MÉTRICAS (KPIs) NAS CORES DO EXCEL -->
+        <!-- CARDS DE MÉTRICAS (KPIs) -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div class="glass-card p-4 border-glow-blue">
                 <p class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Período Analisado</p>
@@ -105,7 +104,7 @@
             </div>
         </div>
 
-        <!-- GRÁFICO MENSAL COM BARRAS GRADIENTES LARANJA/AZUL -->
+        <!-- GRÁFICO MENSAL -->
         <div class="glass-card p-6">
             <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3">
                 <h2 class="text-base font-extrabold uppercase tracking-wide text-slate-800 flex items-center gap-2">
@@ -118,7 +117,7 @@
             </div>
         </div>
 
-        <!-- TABELA ESTILIZADA NAS CORES DO EXCEL (CABEÇALHO LARANJA & DESTAQUES AZUIS) -->
+        <!-- TABELA ESTILIZADA -->
         <div class="glass-card p-6">
             <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3">
                 <h2 class="text-base font-extrabold uppercase tracking-wide text-slate-800 flex items-center gap-2">
@@ -130,7 +129,6 @@
             <div class="overflow-x-auto rounded-xl border border-slate-200/80 shadow-sm">
                 <table class="w-full text-left text-sm">
                     <thead>
-                        <!-- Cabeçalho em Laranja S.O.S (como no seu Excel) -->
                         <tr class="bg-gradient-to-r from-orange-500 to-orange-600 text-white uppercase text-xs font-black tracking-wider">
                             <th class="py-3.5 px-4">Serviço Prestado</th>
                             <th class="py-3.5 px-4 text-right">Volume (Qtd)</th>
@@ -176,7 +174,6 @@
                             <td class="py-3 px-4 text-right font-black text-blue-600">8,9%</td>
                         </tr>
                     </tbody>
-                    <!-- Rodapé da tabela Azul (como a linha de Totais do Excel) -->
                     <tfoot>
                         <tr class="bg-blue-600 text-white font-black text-xs uppercase">
                             <td class="py-3 px-4">Total Consolidado Acumulado</td>
@@ -196,11 +193,10 @@
 
     </div>
 
-    <!-- SCRIPT DO GRÁFICO (BARRAS EM GRADIENTE AZUL COM BORDAS LARANJA) -->
+    <!-- SCRIPT CHART.JS -->
     <script>
         const ctx = document.getElementById('monthlyChart').getContext('2d');
         
-        // Gradiente Laranja/Azul S.O.S
         const gradientBlue = ctx.createLinearGradient(0, 0, 0, 300);
         gradientBlue.addColorStop(0, '#2563eb');
         gradientBlue.addColorStop(1, '#3b82f6');

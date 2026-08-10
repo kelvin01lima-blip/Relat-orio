@@ -8,6 +8,12 @@
     "mediaMensal": "R$ 6.378,86"
   },
   "mensal": [305.18, 0.00, 6545.82, 7918.00, 22612.89, 1808.90, 5461.27],
+  "mensalDesconto": [305.18, 0.00, 6545.82, 7918.00, 16959.67, 1266.23, 3822.89],
+  "resumoDesconto": {
+    "valorBruto": "R$ 44.652,06",
+    "valorLiquido": "R$ 31.854,63",
+    "economiaTotal": "R$ 12.797,43"
+  },
   "tabela": [
     { "servico": "Inspeção Clube S.O.S", "qtd": "9.423", "valor": "R$ 12.083,38", "part": "27,1%" },
     { "servico": "Encarte Clube S.O.S", "qtd": "9.332", "valor": "R$ 9.400,20", "part": "21,1%" },

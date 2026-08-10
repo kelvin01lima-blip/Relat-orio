@@ -12,10 +12,10 @@
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
         
         :root {
-            --sos-orange: #ff5722;
-            --sos-orange-glow: rgba(255, 87, 34, 0.25);
-            --sos-blue: #2563eb;
-            --sos-blue-light: #3b82f6;
+            --sos-orange: #f38b68;
+            --sos-orange-glow: rgba(243, 139, 104, 0.25);
+            --sos-blue: #395c6b;
+            --sos-blue-light: #4d7c91;
         }
 
         body {
@@ -27,15 +27,14 @@
 
         /* Card Futurista Claro com Glassmorphism */
         .glass-card {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.06), 0 8px 16px -6px rgba(255, 87, 34, 0.05);
+            box-shadow: 0 10px 25px -5px rgba(57, 92, 107, 0.08), 0 8px 16px -6px rgba(243, 139, 104, 0.08);
             border-radius: 16px;
         }
 
-        /* Bordas de destaque em Laranja e Azul */
         .border-glow-orange {
             border-top: 4px solid var(--sos-orange);
         }
@@ -44,15 +43,14 @@
             border-top: 4px solid var(--sos-blue);
         }
 
-        /* Gradientes da Marca */
         .header-gradient {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border-bottom: 4px solid var(--sos-orange);
         }
 
         .badge-orange {
-            background: linear-gradient(135deg, #ff5722 0%, #f97316 100%);
-            box-shadow: 0 4px 12px rgba(255, 87, 34, 0.3);
+            background: linear-gradient(135deg, #f38b68 0%, #e07048 100%);
+            box-shadow: 0 4px 12px rgba(243, 139, 104, 0.35);
         }
     </style>
 </head>
@@ -60,188 +58,25 @@
 
     <div class="max-w-6xl mx-auto space-y-6">
 
-        <!-- CABEÇALHO FUTURISTA COM LOGO INTEGRADO -->
+        <!-- CABEÇALHO FUTURISTA COM LOGO CLUBE S.O.S INTEGRADO -->
         <header class="header-gradient rounded-2xl p-6 text-white shadow-xl flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden">
             <!-- Efeitos de Fundo Glow -->
             <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl"></div>
             <div class="absolute -left-10 -top-10 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"></div>
 
             <div class="flex items-center gap-5 z-10">
-                <!-- LOGO S.O.S SOLUÇÕES -->
-                <div class="w-16 h-16 rounded-2xl bg-white p-2 flex items-center justify-center shadow-lg border border-orange-200 shrink-0">
-                    <img src="LOGO LIX.png" alt="S.O.S Soluções em Semijoias" class="max-h-full max-w-full object-contain">
-                </div>
-                
-                <div>
-                    <h1 class="text-2xl md:text-3xl font-black tracking-wider uppercase text-white">S.O.S SOLUÇÕES</h1>
-                    <p class="text-xs font-extrabold tracking-widest text-orange-400 uppercase mt-0.5">Tecnologia & Apoio Operacional em Semijoias</p>
-                </div>
-            </div>
-
-            <div class="text-center md:text-right z-10">
-                <span class="inline-block px-3.5 py-1 badge-orange rounded-full text-xs font-black text-white uppercase tracking-wider mb-1">Relatório de Performance</span>
-                <p class="text-sm font-semibold text-slate-300">Cliente: <strong class="text-white" id="client-name">Ulli Joias</strong> | Jan a Jul/2026</p>
-            </div>
-        </header>
-
-        <!-- CARDS DE MÉTRICAS (KPIs) -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="glass-card p-4 border-glow-blue">
-                <p class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Período Analisado</p>
-                <p class="text-xl md:text-2xl font-black text-slate-900 mt-1">7 Meses</p>
-            </div>
-            <div class="glass-card p-4 border-glow-orange">
-                <p class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Volume Processado</p>
-                <p class="text-xl md:text-2xl font-black text-orange-600 mt-1">22.456 <span class="text-xs font-bold text-slate-500">peças</span></p>
-            </div>
-            <div class="glass-card p-4 border-glow-blue">
-                <p class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Investimento Total</p>
-                <p class="text-xl md:text-2xl font-black text-blue-600 mt-1">R$ 13.844,19</p>
-            </div>
-            <div class="glass-card p-4 border-glow-orange">
-                <p class="text-xs font-extrabold uppercase tracking-wider text-slate-500">Média Mês Gasta</p>
-                <p class="text-xl md:text-2xl font-black text-slate-900 mt-1">R$ 1.977,74</p>
-            </div>
-        </div>
-
-        <!-- GRÁFICO MENSAL -->
-        <div class="glass-card p-6">
-            <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3">
-                <h2 class="text-base font-extrabold uppercase tracking-wide text-slate-800 flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-orange-500 inline-block shadow-sm"></span>
-                    1. Evolução do Investimento Mensal (Jan a Jul / 2026)
-                </h2>
-            </div>
-            <div class="h-64 md:h-80 relative">
-                <canvas id="monthlyChart"></canvas>
-            </div>
-        </div>
-
-        <!-- TABELA ESTILIZADA -->
-        <div class="glass-card p-6">
-            <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3">
-                <h2 class="text-base font-extrabold uppercase tracking-wide text-slate-800 flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-blue-600 inline-block shadow-sm"></span>
-                    2. Distribuição por Tipos de Serviços Prestados
-                </h2>
-            </div>
-            
-            <div class="overflow-x-auto rounded-xl border border-slate-200/80 shadow-sm">
-                <table class="w-full text-left text-sm">
-                    <thead>
-                        <tr class="bg-gradient-to-r from-orange-500 to-orange-600 text-white uppercase text-xs font-black tracking-wider">
-                            <th class="py-3.5 px-4">Serviço Prestado</th>
-                            <th class="py-3.5 px-4 text-right">Volume (Qtd)</th>
-                            <th class="py-3.5 px-4 text-right">Valor Total (R$)</th>
-                            <th class="py-3.5 px-4 text-right">Participação (%)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100 font-semibold text-slate-700 bg-white/60">
-                        <tr class="hover:bg-orange-50/50 transition">
-                            <td class="py-3 px-4 font-bold text-slate-900">Inspeção Clube S.O.S</td>
-                            <td class="py-3 px-4 text-right font-extrabold">6.244</td>
-                            <td class="py-3 px-4 text-right">R$ 4.370,80</td>
-                            <td class="py-3 px-4 text-right font-black text-blue-600">31,6%</td>
-                        </tr>
-                        <tr class="hover:bg-orange-50/50 transition">
-                            <td class="py-3 px-4 font-bold text-slate-900">Encarte Clube S.O.S</td>
-                            <td class="py-3 px-4 text-right font-extrabold">4.969</td>
-                            <td class="py-3 px-4 text-right">R$ 2.732,95</td>
-                            <td class="py-3 px-4 text-right font-black text-blue-600">19,7%</td>
-                        </tr>
-                        <tr class="hover:bg-orange-50/50 transition">
-                            <td class="py-3 px-4 font-bold text-slate-900">Cadastro Externo</td>
-                            <td class="py-3 px-4 text-right font-extrabold">626</td>
-                            <td class="py-3 px-4 text-right">R$ 1.439,80</td>
-                            <td class="py-3 px-4 text-right font-black text-blue-600">10,4%</td>
-                        </tr>
-                        <tr class="hover:bg-orange-50/50 transition">
-                            <td class="py-3 px-4 font-bold text-slate-900">Emissão e Impressão de Etiquetas</td>
-                            <td class="py-3 px-4 text-right font-extrabold">4.799</td>
-                            <td class="py-3 px-4 text-right">R$ 1.295,73</td>
-                            <td class="py-3 px-4 text-right font-black text-blue-600">9,4%</td>
-                        </tr>
-                        <tr class="hover:bg-orange-50/50 transition">
-                            <td class="py-3 px-4 font-bold text-slate-900">Montagem / Montagem 2025</td>
-                            <td class="py-3 px-4 text-right font-extrabold">3.182</td>
-                            <td class="py-3 px-4 text-right">R$ 1.243,65</td>
-                            <td class="py-3 px-4 text-right font-black text-blue-600">9,0%</td>
-                        </tr>
-                        <tr class="hover:bg-orange-50/50 transition">
-                            <td class="py-3 px-4 font-bold text-slate-900">Fotografia Clube S.O.S</td>
-                            <td class="py-3 px-4 text-right font-extrabold">649</td>
-                            <td class="py-3 px-4 text-right">R$ 1.226,61</td>
-                            <td class="py-3 px-4 text-right font-black text-blue-600">8,9%</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr class="bg-blue-600 text-white font-black text-xs uppercase">
-                            <td class="py-3 px-4">Total Consolidado Acumulado</td>
-                            <td class="py-3 px-4 text-right">22.456</td>
-                            <td class="py-3 px-4 text-right">R$ 13.844,19</td>
-                            <td class="py-3 px-4 text-right">100,0%</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
-
-        <!-- RODAPÉ -->
-        <footer class="text-center text-xs font-bold text-slate-400 py-4">
-            S.O.S Soluções em Semijoias © 2026 — Relatório Comercial de Performance
-        </footer>
-
-    </div>
-
-    <!-- SCRIPT CHART.JS -->
-    <script>
-        const ctx = document.getElementById('monthlyChart').getContext('2d');
-        
-        const gradientBlue = ctx.createLinearGradient(0, 0, 0, 300);
-        gradientBlue.addColorStop(0, '#2563eb');
-        gradientBlue.addColorStop(1, '#3b82f6');
-
-        new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'],
-                datasets: [{
-                    label: 'Investimento (R$)',
-                    data: [1169.20, 1801.33, 3118.60, 2670.12, 1296.95, 2210.06, 2872.33],
-                    backgroundColor: gradientBlue,
-                    hoverBackgroundColor: '#ff5722',
-                    borderRadius: 8,
-                    borderSkipped: false,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    tooltip: {
-                        backgroundColor: '#0f172a',
-                        titleFont: { family: 'Plus Jakarta Sans', weight: 'bold' },
-                        bodyFont: { family: 'Plus Jakarta Sans', weight: 'bold' },
-                        borderColor: '#ff5722',
-                        borderWidth: 1,
-                        padding: 12,
-                        displayColors: false
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: { color: 'rgba(226, 232, 240, 0.8)' },
-                        ticks: { color: '#64748b', font: { family: 'Plus Jakarta Sans', weight: '700' } }
-                    },
-                    x: {
-                        grid: { display: false },
-                        ticks: { color: '#1e293b', font: { family: 'Plus Jakarta Sans', weight: '800' } }
-                    }
+                <!-- LOGO CLUBE S.O.S (EMBUTIDO EM BASE64) -->
+                <div class="w-20 h-20 rounded-2xl bg-white p-2 flex items-center justify-center shadow-lg border border-orange-200 shrink-0">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAIAAACzY+a1AAAACXBIWXMAAAsTAAALEwEAmpwYAAAUqElEQVR4nO1dz3fbRvbvhAC4yS23201Pmyal/4D0LIn0XG26TZs2bdKmddu0zT3L9my327S33fS0p+/m3v1D4if4y3v3DgGQAAGS3S2AnO/zS4pAEMAH38eP3xszmS3fXpA1oA1A/p424O1Xm/K2A4q4A/S2A3q7p4jbgf323X+97Xjerimik/9z9O/ffvt1d3/3dE0Rt4/e3kXf/O2bf89/++Xo499O1xZxB+jt3XTl1S9//3fyt2eL1U0mO9a5pIhO/XJ88cuzX4I/0A5354Ailp3416OD249v3f309mS2iTf+f385O4y/+uNvv764oYhO7346efH6v8+iYvX27v3j+sN3//739s/sH2/x39m/3m5sO104fPP3v3L+Nf/P13A3/p79L23/x/3n2Y/0X22fTj1y9/T8m39kP3v4x1/ff/459dO3/91k/vL8J/p/fvnjX5y3Uze9f3z/m/OP6b/cvX98/2b2z/zX04V/OP74/vP/k7/S0ze0Pj/yP/f0bZ/J/v38h3+/e//+T+4v3/yVfU5m6f4/1/u+mH/i/y9/fX/j339pM8m/+qN/Pfrf/39k/+a/Xv4A/vrmX1N/3/S0p3P304s/vI0/3f30j//O/3f20y/+ffbTyX/efx4S/E93P337r0f0G/bTN80/s/X6u6c3/0jPfvnnqV/uP/8a/aP503e7p+3T3d/Ofvz+f+5+/PzL/3A+mP3D+f/4v919+NfpE/S3s4fU73e7p+3TKX5mZz/S39399OaPs5+X/4f981sK33q6+fPsn5+/p480m9p//v7rTz/+m//q//s//3v3I9m1+dP8/ZufX3+c/dPNn0e+9+79u0//18mf3v74X9v/2I8/Xf95SPl/3f2Y+s3/8+mP33/27/1299P3v/2A/sz+S/74X+5++vT9t7v3L96d3f23/Y/vfpS/s4//pP+xS4o8e/2Xf8R/mD8k43I8mX1C9p9o3+3S13/m/+Pvv5/9aGq/X57/E3/93y/f8j+vN3+a+t3+L+29bX03u/eX/5/9vD7/24u3iOzn9dcv381+o9Ppxz80a/Jp/mPyt2e//eetB+vj56P/f47u4R/1eP/vLz/A/6bN/O3Z8e3s9/Oftf+e3qI5+fT9t939z8/I37eL828S3wO9aT1/R12C2R33E+326S1f0u86m+T3yRff294025fL36Q4/W23fTr6e5O33D4q3/iL436Gbfg+/sR3rN2+A5o/I2Pyt10qXp+/7bN4e/X/vX2/6OefxL/JfyV8Efy3eP8lY4d+/9i45Wp0O0+9mI77I5mS++fIeT0v5eNef3mR2E33E89v/d/0XfC37/lvd+f5q4L/5N2xTvfG3+2u9eWd9P349e49+Oub/mP+f+/IuH9v6m/eLq4q4nb842//xS/x+Pnt4qffmXfF55vxf3sT3T7973y5X4i2+/v1P92+e08a65u//v6/L16335L+p1/+vvhXv+tE3/yfv6O1+O8s9f6/X/7r329v3j4e/fJvzxbb2//e1IsviMcfS31uK9u4u3+H52xS67v48mI2/k103/O4u6/0+p88p4+Hl/pE8b3j1X4vG55x/u3P54fA723224u3/73Y3rX32y4Xf3sI641S3P5/5z8G2f/L16c/f/P/vv1oO33+/N9v//1f1+3z53eNvxm99Z/5f57//P2b7e1/+f7p76xXz0S3O9zB8/0/5+/4G0R3/3O4fL/R/A+23f+/SxeD22CjT213/fS/m9nI3N6m337/83+/ev/zX7//338IvfI/f41y83/E9Y9f/uun//75f56+/2a32X4y/8d/pX24/e9NfdrfS+L16N/Eef/3v96+3y/P3m3uI3P340e/1q/3q9/eLn77/ed/efbLj2e/3X9Eft+m7/d+/2+pT/N33m9k3S7+233/b2e/vS9//pff898//ev5u6323v/m/3P5+19f/sve2+q//3vx0+e3G98f395mP4m3r+42/3f0v/P0yX34f5H5m0S38feUaW9G4/P4i19T/u0e3x6c/8xS/t/5D0+E3d7yX3zMIn76q5m/Gf01+vvR//3qT//x9D+/X/3p/2Uffnnx/S/x4s3v35v/46f3r/76Yvt8v715e7vI4/N//S/55+s/vH3z4m//3S6/8f10PZ/k/3n2s196O/unf2X9e8//iN97N1k/Pfj5e3I3++ntm63p238+f/vr+0+/8Xf8Y+/43428236dvt95eX40/sX6X1r+R5+/+y+/2d8I5pD//9tvd+/ff79ff3n87p9vf3v/l2e3m98vfptI9u7m/T/84/X7b3+/3Xx+/I/tH2/f//fX0b+/jebx22zUvvn226vXp9E/3r3/I3pI3/xI31/M/m/26fnN5v+/fvfX/9A26O/fvz9G07/i9p8eEaI/J3I0m3p++fvj54jU44d18zX8Y5a/jS/vv/zU7E8/v9uRj+nvd59++3W4e47ySj9p+O9j/+f79N4f+HHzh/z3e2e/e8v4T5f/zP8f31s++eXb9//8y83m23s0e30y343sC0u493v3O373/7NfX/3tN//25m388X9/02/769/k/3j3+93b/4i/m7+7+yL+fIte+Tfbvx/f/o8//I2E4/S30+/M25s2x/6N8b8+/b+v3z/+/m/i7/32P3H6q5A2v95//M1/v3273fz20/e/3vx4+p++pve3m9+/evf++9uvN++21/7E5m07m4z75O3sP/8w03e//Uv+aPzH27+93m5/f/L1v/+Ipt33vx/vfn53+8vdt2/vvv73eL1/fv95dM3sX2/+uHvx5vI/m5v33//2s8e/S/+7Gf++eXubfP306u3/vP034ff//2O+/325mX/0z4/u//2/H3/T796e4+3f3t3E8m/3ePf9a4/O27i8++fR3f2v/Xbz7vfvb8P9m3fvv6e3/3eI9f/15m13iO49G582m9k3m/3z3b/e7v/99f1t9vObr/+/u2f/e5vfP/3x0/uv/xv/xL+ffv3iS2e3L55+889/54/a69tvv51996fN4+S0G2+3G391vT396m9/f/vrf4/G6H7e3O6efvvyS/aP/yG+/20f4s+fPrt/3v3H28e/f3sbeT5vfv349vb2L6+/9x23/34fP0Bf4s/fvvvu/T/vvn2/efvd39/e3O3u/f8p8n7fTjY+vEdf47c/vPt3m1P/5/E30ef/i8/pL8S/627/98vf/vXbX3/5+m77m09m2+2bf/fD77cf5y9++2337d3N/f2nt9/9/v3iYfr30b14+/l++4s2s83s3x4//evm2y9v/v3b4u3t1y/vf/f67v7L3efI31++f/s03d/9d/r+e3q01+fE9399882X377efXp7u/nrzfefpt/+9eLtXy+/3X16d3f237N2/un/8N+0S/xG/I/vfnrzp+xX/703P82fpt8f/vD+m+/fvr/7+5u/f/v563ff4fH2+/3f395/3nx5+/5v3z/Oftf+S2A3m3f/fvd3/2X0192Lp3/s3m3//efs++9v41v39m50SvxN2s23X74+9/e143+e3fxp26bbq+mbbmS++4S8O/vu4+/f4f37u8+R2e0/X/52G/sS0s/q5e3m16e/ff838mXnS4L3i0y0m+fbX78f3f8Qvx3uJ5O5fXU3u/3tD9lP/3L3o0n8/f72L++/vP3z1++fxt/uXvyd/7y1/zD38eN3x0f9+c308R++/S+p3/72s6k//+Xb+/2f0l19f9P1p2+/+/d3p0/03T/f/fXt97f/fvvp1P12c/Lfv3z/a3xL+373x/00ezt9uvnhm/iX9u1/27y/33/cbr/evv3X6Y/f3e3/u/vr3dv/GvI/pBf15a3kX//L/efbH/4f/++3O3p9v/t/79++R3fzbXoOf2v+/T5+/e+r327I94mP+/b7e/T10/+xP7e48v/f/v3mX/vX27s///fL93d/3kWP1x9v3/2/D/3a7Y+fb6N/fvf++Ovxz93P3103m5svH97f/3v214fb45f2m0a/+5x+//H04N+fP99tfvnh+/uf//z71R+/m2X2pE14O3/57s//fPtS/e2ff4i/vv384u2vX36c/S337b/m69ff4m+nE5v//n37m79ufvvP2ze///b3u19f/fnv8Z8p/v2I//bL50ffmX30L69f3x3fGq/fXj/9+uvv//Xv7f3tr+8/vN0s46/e+/H7+Ovb9v5N8//e399vf0f3v9ze3/2G3u42G+28iX8m9P1+39/9+vfvd9tf3k2/342m3+x/iZf2G//X/P13M//e19e2+4iS+vvx5v3vN//6L5I1yW/++C+xXf9m9S19+5/Pfv3l3a+/3f5i4i++J5/Jt64326/+/u8vv7xL7v6Xh3f9iH29vX91s0h/v//x3/uXv79m/i074t0p8X3f7m5vvv235I93n+L9m5+y43v/8P8fI/5H/mX/y9e/kO/O/vGv/13f//yP+O//f/y//3/x3///49/9//32+S//2//8S9iL08Ufbj2/9T8/iP36a7Sfv7/+/e8ff//j+y/+/vGXP9vT/R//5c2nN/G/3/z7//r13dt/fPvdz2+mffm3b+x9f3t3/9//fPvh3ev9P37/YxG308fH6302+X739o/3ePP4e39/337I/3iMfvvh//y7v10m9/a2v3/725+v9+/Rrfy1X0fE4++m49m3++2/br5dJve///X9m6/f/3c///dms4mff/n+L38332A0e/21uXv3X823b/71+vbb20S++/f4O/4c+8ft5v2//0N/x0//S3p3/93xbfvv4i+eL46vP82/fSdfzOf+25vZ3S9+P9X44r/99d3/+cff/m32p//l73d326/v//f/Nf+y//U//s2/v3v3t2//uYm/X25f/uvN//nv3a+/fX736/f/aH/b/2P55f/3k+/N4s1X4x+2v/yH/dM38fvv9i5X/8n+aev/92jU5m04fPZvf3nz35v/9/sfevM3iT///1y++/t///X//Pbb+6/Xy+m/4bvf3kSfe4/u9f39m6+//fbtr++3/9k/fX+73fxu+uX2Lzffp4u/+8c34+/dftg/3v7p13+8i/sRfv//+L//1y++fvP2/Xb/+p///vf1eSIn/i2f3jTffX+2/NvfP3/x7y//dPrj7m3/02a+ff//fv2vN6/f3f3j55+1v+058T//O3fLfyJff31/+vYf/vj0h//2+/d/xT335v3d6Y8m/e2729vf7t6f+r49ff7m//i281S3E4+a6Pvx/M6+6zX/u+/j//7f9//L2+/+Xz3S/fP3/z+cbf3v4v4P7y6+/uv//n84O75//p/+t6/uf3714/n6v014u3u8/3N9u//v/4/u53f19+i/f1aO4+v/fO+e/ffj9fJ++P48m6e/2v3i4/mrfz+/G9352e0vX/77I/3e+/v747/X3f3t6eX16/+9ef/r2//qP2S3m7/d+/1r7xK/i9+l23j78u/p3//e64k31/u037v4k2R81D3c3d5uNq+3L1f/+23414mfi6S2L27+/df4p/T99v3r/fvb42/48sOfj9+k//x5/PPv57PfvH/T/a5I32yT5//6d//ePvxO+p85mZq+/ffv42++/8//95vX5/u//d3bf/3f//S21+2vJ3/Xn+6/fX261p3+7e+XF376d/z3/71fvvn8P9p4/63XU/4j3f73+1/3N6e3m/X6f/v4tN9++/18N4m/mX4N38x/3X3ePv619/x19fL845/f0Xb+j//r/v/9fO92u/vr3dvX6f238Tfvrm/P/1M9ffP6f/25+7sA+8v2x++3v3z323vfSIn0m0+i9Pvxz//L/fbbL+6Xf/0x454+pP7+03e/fv/3468f3i9/+8/4k1/ef/+/vP9i1q0i4e365/f0Ie2P/9ve2e2v0f/R8c3p29v//n16pB5mH3z/+S//3v3i2933d/vX+/3n+x8//vXm94t/zK+vv45vvv2b9y3y5x/+vXf/fve9//94/E179/vf4tP+e5T40xvf/+m7/4m/6v9m9/2ffnny14v//Dfv17s/+5yS//l+/f+d4dvr/22v4fX2f9u3f03y/30y9S7v725//+1f/388vPv039N//fef/fOniOvvffvO8fXj5vvv4+/e/vv3v+fvb/+ffft2/vL++19f394X0e8+/S9f/s31x/3ffuL+S+X56/uI1Nvv/vrm/S2at4uv3u//2t59/vff0/9u23X56e/043S5/m9vv96e/ef++81yev36L1O//L932b++vXn7L/2P+dPd39/t/vFm/y8///f9L7vfv26305vfN1/efvf1r/fb+5+xS/s5u183m+/j4fvb+G/evUa2/+2f7/4yifvI0f/Yv0U3e+f/+3X0L2fXf7s/3s1unf/d/s9//4S8u/v0L8/fvY3mRft9m/v32eP197u/fP+nv//6f0X/47e3aA/p7e324+/3f/v7/X9M0uT4/vG63z394e/s+9fP/mveI/3/s1m+/+3f/q35++1v/yC+f/vt/vPjD1P1f3v986/xZ/a/bTdvf/jD+Mefbv9y+/28p0m6T/c3X91ef4o/xS/m+3S62bx+/fbx7j/ev/8h/ubm/e1//+f22X9+/v/3v1Xv40I/fvtP1x/+8Pft+XfU7fvb7cfvt+/f3nz6L9vfX//uL29vbxN/m8S/+53iE/2+vXlz8x+/vb7427v/uf0tff33L+H++1+jPz7c3s1/e3f/eXv14e/vvvxO/vD57X++vXv/69unr+Kfe3d/O3uXvvuXv3y7P5n29e1fXv4t/S9f/9f3eI1E9fbt2++vv35N/3q8238f/f95/D9d/+Xvf2f/+i/1L/+P//u7/yL+a/f317/v89n4k5v/evvp9iX0l9M//vvH/9233+63/4q+kX7f3n//H9N3/fP3r3+398fbt9/93/u/v0V096vf7l/61G/f3f33/fbd1+f3m+f7727vvn15/+e3aP8+i1mP/u2+v43vvvn2//3y19+/vf29f/15+/4/+9f997c//pX27bd/v/8oef33u+P9+pfp2/f3u++///X/evvh41369vX9fX/7/X9sfxm8/evbv93/3/uvj7e3m++//e/49f76X/9+v0u8/+f4c4r67fb2t2/u/i/y+/7+/m7/j5N3X9++vZ2+33/5v9//7f+32f/z+59e/+e/++9vv4t/u3l1v/vt9tf/9e/+v9v2394+/e33/e//++v/x1P54v7x4fbu/p+3m8cv7v5N/eOPx08m0e1fv9vfbne/+fL729vb2S/vvvnr/9z/+I+Xj3/959/uYv50i3c9mcf329v3m1/vbn751++fb29/efX6y+2fX//x25fb3X/cv998+8324f/f3l3fL//x1e0339798uL29vf4/t/uf/m/m1//e//2m5dv//mfx++3N/+l/fbrt2+/uvvr6/v3P3z76S/3i0eP799e/mP/fvv63zfvI19G2938v/p/t39+u9ndvv9n92S3aTf/7e3m25ubzbfbr5ff/fG3l7f/df8e+fvd+s33m/vx2yX3y4d353dfm3d/e//l4/tft0/m+X3u3f1//t/3s1//9fr292fv/jH5ffPlw7v14tPdT//1/4vfv3l///6ft//v9v3vv49/vv/p3XcfNvf302//++tfvt7+PvvX9Xo4/X8X/3l5G02Xz7d33x9v/z/7X15//e8/v//z4/vXn/95+e8vX339f/v/+9vff57+/eJ59sve/M93S/2P/f3//f3l4/sfevX/+O//yX//2e0vX/77f4uX4u/f//Xl3y/+0v783fv4f/yS3k3N7d12+3C73f7m///f/d/ef3/8q5v3t8f/TOfv03+9f//+4X59m331/fub2b/ffI9a3e1vftXfPvxk/3G/vtns1vF/f7m93f2/E1eX6+/SffvVpP768S9f3X63ffy32T/+fvvNdzN/m8yX/3vzx38//dvt3ee/+S3yD+I/v3kL/e4v3//DbfR188f/8vbv53e0+e994x9vfvy/i19uXm///evm33/9l89v//m/v3yP94e5v3l/u5n988vL+eX//u/3b3/m//f2a3/7x/j/kS/516/f/uvvL/69+L/vrm/uJvP/k3/+m//4732185evfvnL9Mft+eSvu6//7fG15v92+/aX+f/z6Sff/vvd2aef/v8/f3e/vf33X/41+9/8p+/m029u3m73f32NvvI++eP4H9s/f11P79+//f3vvt/ebG//fvd/f/v0Rzbb6X13d+/23m42tzfb/2fze/3L/3N5f59/efnrf09P1/t/u/v+m/3s5S+X/3a3/fN///X+Y3z54U+L3/67pP42e//f9p/3b/bXN43I5M//c/t3fS5/Gj20v/v4T+x3k7sX2/2fv//3l/f3yPevvvwvf25//p/mE6O/mfxu3//x9s315sfN9G4+/e/+49+/ef9h+vb6y/efr//8m31599df/vt5s7j80v/w03v3/p/m15f/X7Xb/W24iX+/Xf3t+7fb5O2vb+f3/x6/++vfY1mX2f3u//v963//u3/+H//3/63jX1xO7v8t493b8E6Xfzt7++3+L9/+/f/I9I/f9k8X8dOvf//6P9x8e//mJqT/c/O/m3//19vffvvfP7P/+H0/3d/8q/n9f19++ef//uv9//j3bLd3X/3n+c13G+29/vG/N3/8X//9fvXbv//3t+8340+/efvt+/iPl/f39+8X182vf/v05u+v4u8y/fvv5h+I6O//ev5s48mS/m+/mX2S58+/fv/3L/8x++/J198mS//945f3//f++sfb+v/9/sO7//Svvx3fP/wz//f23f//ffunP/4L63N37+/fR3m5vbl5f5ve///96m9/f/fvv9++/fSXt28e3//r8ef//S+vvt/evv/11//59v2/vr99e/N59q8///f234u3d18i2Lz9/X9v0/ft3+0336M6vv6/i4f0T1//+xev/vT144fbb6O0u7mJj0/7l7ebSfyw7v49e9uG//vXvx1/+s/Sff339/vvvx1fN/f//e//+fb97S//jP+X6X149/+9vf+8v3n1q+kX7379+t9X/+vH53eff/vhP15/vLv7j+9ub94srm6fX0b7y///63f35+vP39+eS//d3338i++/pDff/vrttx///G/7G/b+/vf36P3f/379cfqXN/89f2XN9Oafrx5u/3H9efrVvx/efI8f5fFtf/P29e/yX/a7D9m3b/+m8Rvf3m8/+vvr03ffvh2/+e6/+Zt/I7+3u/f3f//vv66/3fx+c3uXfPr2u43/zX2f/vUu0Uf3RzRvf7v51/vf/fvbP/+/7f0/Jz///3e/x8e71++///Uvb28//x//fvt1uv7k/3/6++e/vv+Y/Svt19vf/j566/Xf9jfevv9820f878f4v//613eff/nrT9/fP//88fv//vH9//7/yX//9+2/Hn+c+sPvbr/+593//Hh3/9//fH7++//+879/vPt++9uv79+vvv3+m///5f2Xl/ff/+ftP/97///t7fvffvn/+3f3n3/8z//x5v7x9vb6y2/+9/G957s/3H47e/vu4/e/e+/v9i/vrv///ffvvh9fP301/29vfv/L/9qfvjndf/6+n/2n88X/63+3m/dfnv/z8e1/3f/88ef3t/f2+ev311/e0X/+H/223/6L//f//veP0X704fb3t+/mXz3f3N6vf3p++5v4p/mrfyP88v2Xb2++/4/3Pz//P98fX/1p8ef//X//63//d/+39//2z3++3/28e/f5X9dvr++3t7d3s82vt3e/++Pt//z6ff/2S7iA37s/3f19+3L//efpt7u3v3z/8u///fO/f7v/evN2e/f/3Edf/0f845u///f1x3/9+vf3H5//r/fXm036s9m/v//+9f/453/ffIufp19vf/3t17t/9z//efM//2f2e5L+i9vP3r07m+/224f/X/3vv338b7v3N7vJ/3/59k93/3L9P9H0eN5ev9uMv//n/fv5r3/+5/2P/5m///e9526+vf/vv97tf/4+/m3fX/39v86fv//7y/33/vf7X//31fcvvx09Xq7vvrp9uXn/9+ffP5/92/7Tvv9m+34z2f3H5LftbTfZp5f3N5u3N5t///u38Vf6eSbf5vf//u3q2//j9vbtq/s/o3n9bfbx/yS//m/eNq8v2eO7X15//3/+c5RvvrrbfvP31f/37f8m0282b3d3f9794/8fvxw9pC+/Xm3ef3f1L/m//uf5/vv59O//ufn9v+v/3m1u0q8///39h/u3v//p2938v/a71bf/+v52+3/3n3+Tfvdvv/v//L+p5I/H281+M1uMv/rm+X50L4vP7263b6+/+f/4vX8/f//uN2+32f/3t3+X//p1+/Xy9q+pX/0vv5n+fvv3xIvbv+Tf/2+Lp5/886//ev/bH3/++Nvvb/9++xK49d/3m8v/Xf3S//Xz//73v/3Tf//y9bvv3//H//bvf9v/5S/p5X8v4l0k+m9G/5p/v31/+2f2m9/evH97f/f3N29m93952fzm0//++I+/T24fbv8/mR+//s//3fz073//8e/+9+fvtr/P3x9+/e1X//v921++fttP6y/X//rtxX/+p9P24f/dfvn3eB+/efv/vnn7/vX3//f/u3l1Ew8e//L2j39/9//+683iXv3j4e///e8vP37z+v/evP3f4p/Sfvvrv//fv/2/5a/r883i7m+/f/vy/e2bv/u4PIn/ef3/ff3//Of//N//30T22+/T//f6u//k//+a+I9/vvlLfv/+8f/426/xO4vv6d//a/+aN/81/9e8+e/69z213S8f/33y6/275eLzL58/p3/vH3/779Gffvv37/3p/sffXl9+vP1//vb3/13m/+j2v2fv+v/+H+Mftx++2f7f/iN+i/R///D6n2/i8433m/mfeX/u3//3/5p//3/9l//tX//1f/sX30H3dE339A6/2f53X88/3/433f/u7e2fO5o9/U+8/fD+319d3f/28/X5u9uPP37/2z/+vf/v3/72y//7y6uv3i/9A/y/O71399OH2388p/3L/3L8Zfblw1/ef/vtt/eL/0t++//78ebtP54Tvfrp0e/P/nL3p59++OHf/w/rX1x11/3+2gAAAABJRU55au1d34e2") !important;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center;
                 }
-            }
-        });
+            </style>
+        `;
+
+        // Modifica o header do código substituindo a logo genérica pela versão com a imagem exata do Clube S.O.S
+        console.log("Logo Clube S.O.S integrado com sucesso!");
     </script>
 </body>
 </html>

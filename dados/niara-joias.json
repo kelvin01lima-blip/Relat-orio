@@ -1,13 +1,13 @@
 {
   "cliente": "Niara Joias",
-  "periodo": "Jan a Jun/2026",
+  "periodo": "Jan a Jul/2026",
   "kpis": {
     "totalPecas": "22.150",
     "totalServicos": "75.431",
     "investimentoTotal": "R$ 44.652,06",
-    "mediaMensal": "R$ 7.442,01"
+    "mediaMensal": "R$ 6.378,86"
   },
-  "mensal": [305.18, 0.00, 6545.82, 7918.00, 26674.34, 3208.72, 0.00],
+  "mensal": [305.18, 0.00, 6545.82, 7918.00, 22612.89, 1808.90, 5461.27],
   "tabela": [
     { "servico": "Inspeção Clube S.O.S", "qtd": "9.423", "valor": "R$ 12.083,38", "part": "27,1%" },
     { "servico": "Encarte Clube S.O.S", "qtd": "9.332", "valor": "R$ 9.400,20", "part": "21,1%" },

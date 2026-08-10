@@ -4,18 +4,24 @@
   "kpis": {
     "totalPecas": "7.790",
     "totalServicos": "22.459",
-    "investimentoTotal": "R$ 13.844,19",
-    "mediaMensal": "R$ 1.977,74"
+    "investimentoTotal": "R$ 13.938,79",
+    "mediaMensal": "R$ 1.991,26"
   },
-  "mensal": [1169.20, 1801.33, 3118.60, 2670.12, 1296.95, 2210.06, 2872.33],
+  "mensal": [1169.20, 1801.33, 3118.60, 0.00, 4237.48, 2874.38, 737.80],
+  "mensalDesconto": [1087.36, 1675.24, 2900.30, 0.00, 3940.86, 2586.94, 664.02],
+  "resumoDesconto": {
+    "valorBruto": "R$ 13.938,79",
+    "valorLiquido": "R$ 12.854,72",
+    "economiaTotal": "R$ 1.084,07"
+  },
   "tabela": [
-    { "servico": "Inspeção Clube S.O.S", "qtd": "6.244", "valor": "R$ 4.370,80", "part": "31,6%" },
-    { "servico": "Encarte Clube S.O.S", "qtd": "4.969", "valor": "R$ 2.732,95", "part": "19,7%" },
-    { "servico": "Cadastro Externo", "qtd": "626", "valor": "R$ 1.439,80", "part": "10,4%" },
-    { "servico": "Emissão e Impressão de Etiquetas", "qtd": "4.799", "valor": "R$ 1.295,73", "part": "9,4%" },
-    { "servico": "Montagem / Montagem 2025", "qtd": "3.182", "valor": "R$ 1.243,65", "part": "9,0%" },
-    { "servico": "Fotografia Clube S.O.S", "qtd": "649", "valor": "R$ 1.226,61", "part": "8,9%" },
-    { "servico": "Combo Completo 2025", "qtd": "848", "valor": "R$ 1.009,12", "part": "7,3%" },
+    { "servico": "Inspeção Clube S.O.S", "qtd": "6.244", "valor": "R$ 4.370,80", "part": "31,4%" },
+    { "servico": "Encarte Clube S.O.S", "qtd": "4.969", "valor": "R$ 2.732,95", "part": "19,6%" },
+    { "servico": "Cadastro Externo", "qtd": "626", "valor": "R$ 1.439,80", "part": "10,3%" },
+    { "servico": "Emissão e Impressão de Etiquetas", "qtd": "4.799", "valor": "R$ 1.295,73", "part": "9,3%" },
+    { "servico": "Montagem / Montagem 2025", "qtd": "3.182", "valor": "R$ 1.243,65", "part": "8,9%" },
+    { "servico": "Fotografia Clube S.O.S", "qtd": "649", "valor": "R$ 1.226,61", "part": "8,8%" },
+    { "servico": "Combo Completo 2025", "qtd": "848", "valor": "R$ 1.009,12", "part": "7,2%" },
     { "servico": "Inspeção Veneziana", "qtd": "691", "valor": "R$ 241,85", "part": "1,7%" },
     { "servico": "Cravação Clube S.O.S", "qtd": "160", "valor": "R$ 112,00", "part": "0,8%" },
     { "servico": "Cadastro Reposição Clube S.O.S", "qtd": "220", "valor": "R$ 110,00", "part": "0,8%" },

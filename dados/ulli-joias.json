@@ -1,0 +1,26 @@
+{
+  "cliente": "Ulli Joias",
+  "periodo": "Jan a Jul/2026",
+  "kpis": {
+    "totalPecas": "7.790",
+    "totalServicos": "22.459",
+    "investimentoTotal": "R$ 13.844,19",
+    "mediaMensal": "R$ 1.977,74"
+  },
+  "mensal": [1169.20, 1801.33, 3118.60, 2670.12, 1296.95, 2210.06, 2872.33],
+  "tabela": [
+    { "servico": "Inspeção Clube S.O.S", "qtd": "6.244", "valor": "R$ 4.370,80", "part": "31,6%" },
+    { "servico": "Encarte Clube S.O.S", "qtd": "4.969", "valor": "R$ 2.732,95", "part": "19,7%" },
+    { "servico": "Cadastro Externo", "qtd": "626", "valor": "R$ 1.439,80", "part": "10,4%" },
+    { "servico": "Emissão e Impressão de Etiquetas", "qtd": "4.799", "valor": "R$ 1.295,73", "part": "9,4%" },
+    { "servico": "Montagem / Montagem 2025", "qtd": "3.182", "valor": "R$ 1.243,65", "part": "9,0%" },
+    { "servico": "Fotografia Clube S.O.S", "qtd": "649", "valor": "R$ 1.226,61", "part": "8,9%" },
+    { "servico": "Combo Completo 2025", "qtd": "848", "valor": "R$ 1.009,12", "part": "7,3%" },
+    { "servico": "Inspeção Veneziana", "qtd": "691", "valor": "R$ 241,85", "part": "1,7%" },
+    { "servico": "Cravação Clube S.O.S", "qtd": "160", "valor": "R$ 112,00", "part": "0,8%" },
+    { "servico": "Cadastro Reposição Clube S.O.S", "qtd": "220", "valor": "R$ 110,00", "part": "0,8%" },
+    { "servico": "Lixa e Acabamento", "qtd": "60", "valor": "R$ 48,00", "part": "0,3%" },
+    { "servico": "Caixa M", "qtd": "1", "valor": "R$ 12,00", "part": "0,1%" },
+    { "servico": "Defeitos 2025", "qtd": "7", "valor": "R$ 1,68", "part": "0,0%" }
+  ]
+}

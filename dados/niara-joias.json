@@ -1,1 +1,25 @@
-
+{
+  "cliente": "Niara Joias",
+  "periodo": "Jan a Jun/2026",
+  "kpis": {
+    "totalPecas": "22.150",
+    "totalServicos": "75.431",
+    "investimentoTotal": "R$ 44.652,06",
+    "mediaMensal": "R$ 7.442,01"
+  },
+  "mensal": [305.18, 0.00, 6545.82, 7918.00, 26674.34, 3208.72, 0.00],
+  "tabela": [
+    { "servico": "Inspeção Clube S.O.S", "qtd": "9.423", "valor": "R$ 12.083,38", "part": "27,1%" },
+    { "servico": "Encarte Clube S.O.S", "qtd": "9.332", "valor": "R$ 9.400,20", "part": "21,1%" },
+    { "servico": "Cadastro Externo", "qtd": "1.602", "valor": "R$ 6.742,46", "part": "15,1%" },
+    { "servico": "Fotografia Clube S.O.S", "qtd": "1.586", "valor": "R$ 5.492,20", "part": "12,3%" },
+    { "servico": "Emissão e Impressão de Etiquetas", "qtd": "8.474", "valor": "R$ 4.197,29", "part": "9,4%" },
+    { "servico": "Montagem", "qtd": "3.925", "valor": "R$ 3.974,03", "part": "8,9%" },
+    { "servico": "Inspeção Corrente", "qtd": "1.956", "valor": "R$ 1.250,26", "part": "2,8%" },
+    { "servico": "Cravação Clube S.O.S", "qtd": "416", "valor": "R$ 535,82", "part": "1,2%" },
+    { "servico": "Combo Completo 2025", "qtd": "140", "valor": "R$ 312,56", "part": "0,7%" },
+    { "servico": "Cadastro Reposição Clube S.O.S", "qtd": "362", "valor": "R$ 312,56", "part": "0,7%" },
+    { "servico": "Inspeção Veneziana", "qtd": "438", "valor": "R$ 281,31", "part": "0,6%" },
+    { "servico": "Caixa G", "qtd": "2", "valor": "R$ 69,99", "part": "0,1%" }
+  ]
+}

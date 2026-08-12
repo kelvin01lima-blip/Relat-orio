@@ -51,7 +51,7 @@
 
     <div class="max-w-6xl mx-auto space-y-6">
 
-        <!-- CABEÇALHO COM LOGO CLUBE S.O.S VETORIAL -->
+        <!-- CABEÇALHO -->
         <header class="header-gradient rounded-2xl p-6 text-white shadow-xl flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden">
             <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl"></div>
             <div class="absolute -left-10 -top-10 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl"></div>
@@ -148,7 +148,7 @@
             </div>
         </div>
 
-        <!-- SEÇÃO "A MAIS" NO FIM DA PÁGINA: DESCONTOS & ECONOMIA -->
+        <!-- SEÇÃO: DESCONTOS & ECONOMIA -->
         <div id="secao-descontos" class="space-y-6 pt-6 hidden">
             <div class="border-t-2 border-dashed border-slate-300 my-8"></div>
 
@@ -174,11 +174,11 @@
                 <div class="glass-card p-5 border-glow-orange bg-gradient-to-br from-orange-500/10 to-amber-500/10">
                     <p class="text-xs font-extrabold uppercase tracking-wider text-orange-600">Economia Gerada</p>
                     <p class="text-2xl font-black text-orange-600 mt-1" id="desc-economia">-</p>
-                    <p class="text-xs text-orange-600/80 mt-1 font-bold">Maio (25%), Junho e Julho (30%)</p>
+                    <p class="text-xs text-orange-600/80 mt-1 font-bold" id="desc-legenda-card">-</p>
                 </div>
             </div>
 
-            <!-- GRÁFICO COMPARATIVO BRUTO VS LÍQUIDO -->
+            <!-- GRÁFICO COMPARATIVO -->
             <div class="glass-card p-6">
                 <div class="flex items-center justify-between mb-4 border-b border-slate-200 pb-3">
                     <h3 class="text-base font-extrabold uppercase tracking-wide text-slate-800">
@@ -197,7 +197,7 @@
 
     </div>
 
-    <!-- SCRIPT DE CARREGAMENTO DINÂMICO -->
+    <!-- SCRIPT DINÂMICO -->
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         const clienteParam = urlParams.get('cliente') || 'ulli-joias';
@@ -234,13 +234,21 @@
 
                 renderChart(data.mensal);
 
-                // EXIBE E RENDERIZA A SEÇÃO DE DESCONTOS APENAS SE EXISTIR NO JSON DO CLIENTE
+                // SEÇÃO DE DESCONTOS LÊ DINAMICAMENTE O JSON DO CLIENTE
                 if (data.mensalDesconto && data.resumoDesconto) {
                     document.getElementById('secao-descontos').classList.remove('hidden');
                     document.getElementById('desc-bruto').textContent = data.resumoDesconto.valorBruto;
                     document.getElementById('desc-liquido').textContent = data.resumoDesconto.valorLiquido;
                     document.getElementById('desc-economia').textContent = data.resumoDesconto.economiaTotal;
-                    renderDiscountChart(data.mensal, data.mensalDesconto);
+                    
+                    // Pega a legenda do JSON ou coloca um texto padrão
+                    const legendaTexto = data.resumoDesconto.legenda || "Desconto aplicado";
+                    document.getElementById('desc-legenda-card').textContent = legendaTexto;
+
+                    // Pega os rótulos do gráfico do JSON ou usa o padrão mensal
+                    const rotulosGrafico = data.labelsDesconto || ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'];
+
+                    renderDiscountChart(data.mensal, data.mensalDesconto, rotulosGrafico);
                 }
             })
             .catch(error => {
@@ -277,12 +285,12 @@
             });
         }
 
-        function renderDiscountChart(bruto, liquido) {
+        function renderDiscountChart(bruto, liquido, rotulos) {
             const ctx = document.getElementById('discountChart').getContext('2d');
             new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio (-25%)', 'Junho (-30%)', 'Julho (-30%)'],
+                    labels: rotulos,
                     datasets: [
                         {
                             label: 'Valor Bruto (Tabela)',

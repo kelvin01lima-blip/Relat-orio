@@ -8,14 +8,14 @@
     "mediaMensal": "R$ 6.378,86"
   },
   "mensal": [166.60, 0.00, 3573.32, 4322.48, 14326.49, 16801.90, 5461.27],
-  "mensalDesconto": [166.60, 0.00, 3573.32, 4322.48, 10744.87, 11761.33, 3822.89],
+  "mensalDesconto": [154.94, 0.00, 2965.86, 3587.66, 10744.87, 11761.33, 3822.89],
   "politicaDesconto": {
     "descricao": "Desconto de 7% (Jan/Fev), 17% (Mar/Abr), 25% (Mai) e 30% (Jun/Jul)"
   },
   "resumoDesconto": {
     "valorBruto": "R$ 44.652,06",
-    "valorLiquido": "R$ 34.391,49",
-    "economiaTotal": "R$ 10.260,57",
+    "valorLiquido": "R$ 33.037,55",
+    "economiaTotal": "R$ 11.614,51",
     "legenda": "Jan/Fev (7%), Mar/Abr (17%), Mai (25%), Jun/Jul (30%)"
   },
   "labelsDesconto": [

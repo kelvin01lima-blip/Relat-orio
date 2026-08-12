@@ -9,6 +9,11 @@
   },
   "mensal": [1169.20, 1801.33, 3118.60, 0.00, 4237.48, 2874.38, 737.80],
   "mensalDesconto": [1087.36, 1675.24, 2900.30, 0.00, 3940.86, 2586.94, 664.02],
+  "politicaDesconto": {
+    "padrao": "7%",
+    "especialJulho": "10%",
+    "descricao": "Desconto fixo de 7% concedido de janeiro a maio e 10% aplicado em junho e julho/2026."
+  },
   "resumoDesconto": {
     "valorBruto": "R$ 13.938,79",
     "valorLiquido": "R$ 12.854,72",

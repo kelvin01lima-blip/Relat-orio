@@ -12,12 +12,14 @@
   "politicaDesconto": {
     "padrao": "7%",
     "especialJulho": "10%",
-    "descricao": "Desconto fixo de 7% concedido de janeiro a maio e 10% aplicado em junho e julho/2026."
+    "legendaCard": "Jan a Jun (7%), Julho (10%)",
+    "descricao": "Desconto fixo de 7% concedido de janeiro a junho e 10% aplicado no mês de julho/2026."
   },
   "resumoDesconto": {
     "valorBruto": "R$ 13.938,79",
     "valorLiquido": "R$ 12.854,72",
-    "economiaTotal": "R$ 1.084,07"
+    "economiaTotal": "R$ 1.084,07",
+    "legenda": "Jan a Jun (7%), Julho (10%)"
   },
   "tabela": [
     { "servico": "Inspeção Clube S.O.S", "qtd": "6.244", "valor": "R$ 4.370,80", "part": "31,4%" },

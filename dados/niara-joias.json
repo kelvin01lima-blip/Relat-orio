@@ -9,11 +9,24 @@
   },
   "mensal": [166.60, 0.00, 3573.32, 4322.48, 14326.49, 16801.90, 5461.27],
   "mensalDesconto": [166.60, 0.00, 3573.32, 4322.48, 10744.87, 11761.33, 3822.89],
+  "politicaDesconto": {
+    "descricao": "Desconto de 7% (Jan/Fev), 17% (Mar/Abr), 25% (Mai) e 30% (Jun/Jul)"
+  },
   "resumoDesconto": {
     "valorBruto": "R$ 44.652,06",
     "valorLiquido": "R$ 34.391,49",
-    "economiaTotal": "R$ 10.260,57"
+    "economiaTotal": "R$ 10.260,57",
+    "legenda": "Jan/Fev (7%), Mar/Abr (17%), Mai (25%), Jun/Jul (30%)"
   },
+  "labelsDesconto": [
+    "Jan (-7%)",
+    "Fev (-7%)",
+    "Mar (-17%)",
+    "Abr (-17%)",
+    "Mai (-25%)",
+    "Jun (-30%)",
+    "Jul (-30%)"
+  ],
   "tabela": [
     { "servico": "Inspeção Clube S.O.S", "qtd": "9.423", "valor": "R$ 12.083,38", "part": "27,1%" },
     { "servico": "Encarte Clube S.O.S", "qtd": "9.332", "valor": "R$ 9.400,20", "part": "21,1%" },

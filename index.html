@@ -76,8 +76,17 @@
                 </div>
             </div>
 
-            <div class="text-center md:text-right z-10">
-                <span class="inline-block px-3.5 py-1 badge-orange rounded-full text-xs font-black text-white uppercase tracking-wider mb-1">Relatório de Performance</span>
+            <div class="text-center md:text-right z-10 flex flex-col items-center md:items-end gap-2">
+                <div class="flex items-center gap-2">
+                    <span class="inline-block px-3.5 py-1 badge-orange rounded-full text-xs font-black text-white uppercase tracking-wider">Relatório de Performance</span>
+                    
+                    <!-- SELETOR DE CLIENTES -->
+                    <select id="seletor-cliente-menu" onchange="trocarCliente(this.value)" class="bg-slate-800 text-white text-xs font-bold py-1 px-2.5 rounded-full border border-orange-400/50 focus:outline-none cursor-pointer hover:bg-slate-700 transition">
+                        <option value="anela-acessorios">Anela Acessórios</option>
+                        <option value="niara-joias">Niara Joias</option>
+                        <option value="ulli-joias">Ulli Joias</option>
+                    </select>
+                </div>
                 <p class="text-sm font-semibold text-slate-300">Cliente: <strong class="text-white" id="client-name">Carregando...</strong> | <span id="client-period"></span></p>
             </div>
         </header>
@@ -199,8 +208,19 @@
 
     <!-- SCRIPT DINÂMICO -->
     <script>
+        let chartInstance = null;
+        let discountChartInstance = null;
+
         const urlParams = new URLSearchParams(window.location.search);
-        const clienteParam = urlParams.get('cliente') || 'ulli-joias';
+        const clienteParam = urlParams.get('cliente') || 'anela-acessorios';
+
+        // Atualiza o select com o cliente atual da URL
+        const seletor = document.getElementById('seletor-cliente-menu');
+        if (seletor) seletor.value = clienteParam;
+
+        function trocarCliente(novoCliente) {
+            window.location.href = `?cliente=${novoCliente}`;
+        }
 
         fetch(`dados/${clienteParam}.json`)
             .then(response => {
@@ -257,12 +277,14 @@
             });
 
         function renderChart(dadosMensais) {
+            if (chartInstance) chartInstance.destroy();
+
             const ctx = document.getElementById('monthlyChart').getContext('2d');
             const gradientBlue = ctx.createLinearGradient(0, 0, 0, 300);
             gradientBlue.addColorStop(0, '#2563eb');
             gradientBlue.addColorStop(1, '#3b82f6');
 
-            new Chart(ctx, {
+            chartInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'],
@@ -286,8 +308,10 @@
         }
 
         function renderDiscountChart(bruto, liquido, rotulos) {
+            if (discountChartInstance) discountChartInstance.destroy();
+
             const ctx = document.getElementById('discountChart').getContext('2d');
-            new Chart(ctx, {
+            discountChartInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: rotulos,

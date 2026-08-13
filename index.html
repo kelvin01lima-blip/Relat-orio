@@ -141,7 +141,7 @@
             </div>
 
             <div class="text-center md:text-right z-10 flex flex-col items-center md:items-end gap-2">
-                <div class="flex items-center gap-2">
+                <div class="flex flex-wrap items-center justify-center md:justify-end gap-2">
                     <!-- BOTÃO VER SENHAS (Visível apenas para o login Diretoria) -->
                     <button id="btn-ver-senhas" onclick="abrirModalSenhas()" class="bg-amber-500 hover:bg-amber-600 text-slate-900 text-xs font-black py-1 px-3 rounded-full shadow-md transition hidden">
                         🔑 Chaves de Acesso
@@ -155,6 +155,11 @@
                         <option value="niara-joias">Niara Joias</option>
                         <option value="ulli-joias">Ulli Joias</option>
                     </select>
+
+                    <!-- BOTÃO SAIR -->
+                    <button onclick="fazerLogout()" class="bg-red-500/80 hover:bg-red-600 text-white text-xs font-black py-1 px-3 rounded-full shadow-md transition ml-1">
+                        🚪 Sair
+                    </button>
                 </div>
                 <p class="text-sm font-semibold text-slate-300">Cliente: <strong class="text-white" id="client-name">Carregando...</strong> | <span id="client-period"></span></p>
             </div>
@@ -288,6 +293,17 @@
         let chartInstance = null;
         let discountChartInstance = null;
 
+        // VERIFICA SE JÁ EXISTE UMA SESSÃO ATIVA AO CARREGAR/RECARREGAR A PÁGINA
+        document.addEventListener('DOMContentLoaded', () => {
+            const usuarioSalvo = sessionStorage.getItem('usuario_logado');
+            const arquivoSalvo = sessionStorage.getItem('arquivo_atual');
+
+            if (usuarioSalvo && credenciais[usuarioSalvo]) {
+                const userObj = credenciais[usuarioSalvo];
+                iniciarSessao(userObj, arquivoSalvo || userObj.arquivo);
+            }
+        });
+
         function autenticarUsuario(event) {
             event.preventDefault();
             const login = document.getElementById('campo-login').value;
@@ -298,18 +314,36 @@
 
             if (usuario && usuario.senha === senha) {
                 msgErro.classList.add('hidden');
-                document.getElementById('modal-login').classList.add('hidden');
-                document.getElementById('conteudo-relatorio').classList.remove('hidden');
+                
+                // Salva no sessionStorage para manter mesmo dando F5
+                sessionStorage.setItem('usuario_logado', login);
+                sessionStorage.setItem('arquivo_atual', usuario.arquivo);
 
-                if (usuario.eDiretoria) {
-                    document.getElementById('seletor-diretoria').classList.remove('hidden');
-                    document.getElementById('btn-ver-senhas').classList.remove('hidden');
-                }
-
-                carregarDadosCliente(usuario.arquivo);
+                iniciarSessao(usuario, usuario.arquivo);
             } else {
                 msgErro.classList.remove('hidden');
             }
+        }
+
+        function iniciarSessao(usuario, arquivoParaCarregar) {
+            document.getElementById('modal-login').classList.add('hidden');
+            document.getElementById('conteudo-relatorio').classList.remove('hidden');
+
+            if (usuario.eDiretoria) {
+                document.getElementById('seletor-diretoria').classList.remove('hidden');
+                document.getElementById('btn-ver-senhas').classList.remove('hidden');
+                document.getElementById('seletor-diretoria').value = arquivoParaCarregar.replace('.json', '');
+            } else {
+                document.getElementById('seletor-diretoria').classList.add('hidden');
+                document.getElementById('btn-ver-senhas').classList.add('hidden');
+            }
+
+            carregarDadosCliente(arquivoParaCarregar);
+        }
+
+        function fazerLogout() {
+            sessionStorage.clear();
+            window.location.reload();
         }
 
         function abrirModalSenhas() {
@@ -335,6 +369,7 @@
         }
 
         function trocarClienteDiretoria(arquivoJson) {
+            sessionStorage.setItem('arquivo_atual', arquivoJson);
             carregarDadosCliente(arquivoJson);
         }
 

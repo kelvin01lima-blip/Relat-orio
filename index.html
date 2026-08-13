@@ -151,9 +151,9 @@
                     
                     <!-- SELETOR DIREÇÃO (Visível apenas para o login Diretoria) -->
                     <select id="seletor-diretoria" onchange="trocarClienteDiretoria(this.value)" class="bg-slate-800 text-white text-xs font-bold py-1 px-2.5 rounded-full border border-orange-400/50 focus:outline-none cursor-pointer hover:bg-slate-700 transition hidden">
-                        <option value="anela-acessorios">Anela Acessórios</option>
-                        <option value="niara-joias">Niara Joias</option>
-                        <option value="ulli-joias">Ulli Joias</option>
+                        <option value="anela-acessorios.json">Anela Acessórios</option>
+                        <option value="niara-joias.json">Niara Joias</option>
+                        <option value="ulli-joias.json">Ulli Joias</option>
                     </select>
 
                     <!-- BOTÃO SAIR -->
@@ -293,7 +293,7 @@
         let chartInstance = null;
         let discountChartInstance = null;
 
-        // VERIFICA SE JÁ EXISTE UMA SESSÃO ATIVA AO CARREGAR/RECARREGAR A PÁGINA
+        // VERIFICA SE JÁ EXISTE UMA SESSÃO ATIVA AO CARREGAR A PÁGINA (OU F5)
         document.addEventListener('DOMContentLoaded', () => {
             const usuarioSalvo = sessionStorage.getItem('usuario_logado');
             const arquivoSalvo = sessionStorage.getItem('arquivo_atual');
@@ -315,7 +315,6 @@
             if (usuario && usuario.senha === senha) {
                 msgErro.classList.add('hidden');
                 
-                // Salva no sessionStorage para manter mesmo dando F5
                 sessionStorage.setItem('usuario_logado', login);
                 sessionStorage.setItem('arquivo_atual', usuario.arquivo);
 
@@ -332,7 +331,7 @@
             if (usuario.eDiretoria) {
                 document.getElementById('seletor-diretoria').classList.remove('hidden');
                 document.getElementById('btn-ver-senhas').classList.remove('hidden');
-                document.getElementById('seletor-diretoria').value = arquivoParaCarregar.replace('.json', '');
+                document.getElementById('seletor-diretoria').value = arquivoParaCarregar;
             } else {
                 document.getElementById('seletor-diretoria').classList.add('hidden');
                 document.getElementById('btn-ver-senhas').classList.add('hidden');
@@ -376,7 +375,7 @@
         function carregarDadosCliente(nomeArquivo) {
             fetch(`dados/${nomeArquivo}`)
                 .then(response => {
-                    if (!response.ok) throw new Error("Arquivo não encontrado");
+                    if (!response.ok) throw new Error("Arquivo não encontrado em dados/" + nomeArquivo);
                     return response.json();
                 })
                 .then(data => {
@@ -424,8 +423,8 @@
                     }
                 })
                 .catch(error => {
-                    console.error("Erro:", error);
-                    document.getElementById('client-name').textContent = "Erro ao carregar dados.";
+                    console.error("Erro ao carregar dados do cliente:", error);
+                    document.getElementById('client-name').textContent = "Erro ao carregar dados do arquivo 'dados/" + nomeArquivo + "'";
                 });
         }
 

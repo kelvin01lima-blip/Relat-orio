@@ -10,11 +10,10 @@
   "mensal": [4674.37, 186.92, 664.92, 3028.63, 496.20, 5063.99, 1086.29],
   "mensalDesconto": [4674.37, 186.92, 664.92, 3028.63, 496.20, 5063.99, 1086.29],
   "resumoDesconto": {
-    "valorBruto": "R$ 15.201,32",
+    "valorBruto": "R$ 16.265,41",
     "valorLiquido": "R$ 15.201,32",
-    "economiaTotal": "R$ 0,00",
-    "condicaoPagamento": "Parcelamento em 3x sem juros (Pagamento Integral)",
-    "notaTaxaAbsorvida": "Para pagamentos parcelados em até 3x sem juros, o valor total do serviço é mantido sem desconto diretamente na fatura. A S.O.S Soluções assume integralmente a taxa financeira de 7% referente ao parcelamento para comodidade do cliente."
+    "economiaTotal": "R$ 1.064,09",
+    "legenda": "Taxa de 7% de parcelamento (3x sem juros) 100% absorvida pela S.O.S"
   },
   "tabela": [
     { "servico": "Inspeção", "qtd": "6.482", "valor": "R$ 4.537,40", "part": "29,8%" },

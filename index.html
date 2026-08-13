@@ -84,6 +84,34 @@
         <p id="msg-erro" class="text-xs font-bold text-red-500 hidden">Senha incorreta para o perfil selecionado.</p>
     </div>
 
+    <!-- MODAL DE SENHAS DA DIRETORIA -->
+    <div id="modal-senhas-diretoria" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex justify-center items-center p-4 z-50 hidden">
+        <div class="w-full max-w-lg glass-card p-6 border-glow-orange space-y-4 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-slate-200 pb-3">
+                <h3 class="text-lg font-black text-slate-800 uppercase flex items-center gap-2">
+                    🔑 Central de Acessos dos Clientes
+                </h3>
+                <button onclick="fecharModalSenhas()" class="text-slate-400 hover:text-slate-600 font-bold text-xl px-2">✕</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="bg-slate-800 text-white font-bold uppercase">
+                            <th class="p-2.5 rounded-l-lg">Perfil / Cliente</th>
+                            <th class="p-2.5">Login Seletor</th>
+                            <th class="p-2.5 rounded-r-lg">Senha Cadastrada</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabela-senhas-body" class="divide-y divide-slate-200 font-bold text-slate-700">
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-right pt-2">
+                <button onclick="fecharModalSenhas()" class="px-4 py-2 bg-slate-800 text-white font-bold text-xs rounded-lg hover:bg-slate-700 transition">Fechar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- CONTEÚDO DO RELATÓRIO (OCULTO ATÉ O LOGIN) -->
     <div id="conteudo-relatorio" class="max-w-6xl w-full mx-auto space-y-6 hidden">
 
@@ -114,6 +142,11 @@
 
             <div class="text-center md:text-right z-10 flex flex-col items-center md:items-end gap-2">
                 <div class="flex items-center gap-2">
+                    <!-- BOTÃO VER SENHAS (Visível apenas para o login Diretoria) -->
+                    <button id="btn-ver-senhas" onclick="abrirModalSenhas()" class="bg-amber-500 hover:bg-amber-600 text-slate-900 text-xs font-black py-1 px-3 rounded-full shadow-md transition hidden">
+                        🔑 Chaves de Acesso
+                    </button>
+
                     <span class="inline-block px-3.5 py-1 badge-orange rounded-full text-xs font-black text-white uppercase tracking-wider">Relatório de Performance</span>
                     
                     <!-- SELETOR DIREÇÃO (Visível apenas para o login Diretoria) -->
@@ -246,10 +279,10 @@
     <script>
         // BANCO DE CREDENCIAIS
         const credenciais = {
-            "diretoria S.O.S": { senha: "123456", arquivo: "anela-acessorios.json", eDiretoria: true },
-            "Anela": { senha: "12345", arquivo: "anela-acessorios.json", eDiretoria: false },
-            "Niara": { senha: "12346789", arquivo: "niara-joias.json", eDiretoria: false },
-            "ulli": { senha: "987654321", arquivo: "ulli-joias.json", eDiretoria: false }
+            "diretoria S.O.S": { nome: "Diretoria S.O.S", senha: "123456", arquivo: "anela-acessorios.json", eDiretoria: true },
+            "Anela": { nome: "Anela Acessórios", senha: "12345", arquivo: "anela-acessorios.json", eDiretoria: false },
+            "Niara": { nome: "Niara Joias", senha: "12346789", arquivo: "niara-joias.json", eDiretoria: false },
+            "ulli": { nome: "Ulli Joias", senha: "987654321", arquivo: "ulli-joias.json", eDiretoria: false }
         };
 
         let chartInstance = null;
@@ -270,12 +303,35 @@
 
                 if (usuario.eDiretoria) {
                     document.getElementById('seletor-diretoria').classList.remove('hidden');
+                    document.getElementById('btn-ver-senhas').classList.remove('hidden');
                 }
 
                 carregarDadosCliente(usuario.arquivo);
             } else {
                 msgErro.classList.remove('hidden');
             }
+        }
+
+        function abrirModalSenhas() {
+            const tbody = document.getElementById('tabela-senhas-body');
+            tbody.innerHTML = '';
+
+            Object.keys(credenciais).forEach(chave => {
+                const item = credenciais[chave];
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="p-2.5 font-bold text-slate-900">${item.nome}</td>
+                    <td class="p-2.5 font-mono text-orange-600">${chave}</td>
+                    <td class="p-2.5 font-mono bg-slate-100 rounded text-slate-800">${item.senha}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('modal-senhas-diretoria').classList.remove('hidden');
+        }
+
+        function fecharModalSenhas() {
+            document.getElementById('modal-senhas-diretoria').classList.add('hidden');
         }
 
         function trocarClienteDiretoria(arquivoJson) {

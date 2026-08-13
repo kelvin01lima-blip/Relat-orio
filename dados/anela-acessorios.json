@@ -1,0 +1,31 @@
+{
+  "cliente": "Anela Acessórios",
+  "periodo": "Jan a Jul/2026",
+  "kpis": {
+    "totalPecas": "6.965",
+    "totalServicos": "22.665",
+    "investimentoTotal": "R$ 15.201,32",
+    "mediaMensal": "R$ 2.171,62"
+  },
+  "mensal": [4674.37, 186.92, 664.92, 3028.63, 496.20, 5063.99, 1086.29],
+  "mensalDesconto": [4674.37, 186.92, 664.92, 3028.63, 496.20, 5063.99, 1086.29],
+  "resumoDesconto": {
+    "valorBruto": "R$ 15.201,32",
+    "valorLiquido": "R$ 15.201,32",
+    "economiaTotal": "R$ 0,00",
+    "condicaoPagamento": "Parcelamento em 3x sem juros (Pagamento Integral)",
+    "notaTaxaAbsorvida": "Para pagamentos parcelados em até 3x sem juros, o valor total do serviço é mantido sem desconto diretamente na fatura. A S.O.S Soluções assume integralmente a taxa financeira de 7% referente ao parcelamento para comodidade do cliente."
+  },
+  "tabela": [
+    { "servico": "Inspeção", "qtd": "6.482", "valor": "R$ 4.537,40", "part": "29,8%" },
+    { "servico": "Encarte", "qtd": "6.049", "valor": "R$ 3.326,95", "part": "21,9%" },
+    { "servico": "CDE", "qtd": "1.127", "valor": "R$ 2.592,10", "part": "17,1%" },
+    { "servico": "Fotografia", "qtd": "941", "valor": "R$ 1.778,49", "part": "11,7%" },
+    { "servico": "Emissão e Impressão de Etiquetas", "qtd": "5.898", "valor": "R$ 1.592,46", "part": "10,5%" },
+    { "servico": "Montagens", "qtd": "1.714", "valor": "R$ 942,70", "part": "6,2%" },
+    { "servico": "Cravação", "qtd": "340", "valor": "R$ 238,00", "part": "1,6%" },
+    { "servico": "Inspeção Corrente", "qtd": "80", "valor": "R$ 28,00", "part": "0,2%" },
+    { "servico": "Reposição", "qtd": "18", "valor": "R$ 9,50", "part": "0,1%" },
+    { "servico": "Colagem", "qtd": "8", "valor": "R$ 4,80", "part": "0,0%" }
+  ]
+}

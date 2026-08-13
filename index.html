@@ -47,9 +47,40 @@
         }
     </style>
 </head>
-<body class="p-4 md:p-8">
+<body class="p-4 md:p-8 flex flex-col justify-center items-center min-h-screen">
 
-    <div class="max-w-6xl mx-auto space-y-6">
+    <!-- TELA DE LOGIN -->
+    <div id="modal-login" class="w-full max-w-md glass-card p-8 border-glow-orange text-center space-y-6 shadow-2xl z-50">
+        <div class="w-16 h-16 mx-auto rounded-2xl bg-slate-900 p-2 flex items-center justify-center shadow-lg border border-orange-300">
+            <svg viewBox="0 0 120 120" class="w-full h-full">
+                <circle cx="60" cy="36" r="24" fill="none" stroke="#f38b68" stroke-width="3" />
+                <polygon points="60,20 74,32 60,52 46,32" fill="#395c6b" />
+                <text x="60" y="74" font-family="'Plus Jakarta Sans', sans-serif" font-size="15" font-weight="700" fill="#ffffff" text-anchor="middle">Clube</text>
+                <text x="60" y="98" font-family="'Plus Jakarta Sans', sans-serif" font-size="22" font-weight="900" fill="#f38b68" text-anchor="middle">S.O.S</text>
+            </svg>
+        </div>
+        <div>
+            <h2 class="text-xl font-black text-slate-800 uppercase">Portal de Acesso</h2>
+            <p class="text-xs font-semibold text-slate-500 mt-1">Informe seu login e senha para visualizar os relatórios</p>
+        </div>
+        <form onsubmit="autenticarUsuario(event)" class="space-y-4 text-left">
+            <div>
+                <label class="text-xs font-extrabold uppercase text-slate-600 ml-1">Login / Cliente</label>
+                <input type="text" id="campo-login" placeholder="Ex: Anela ou diretoria S.O.S" class="w-full mt-1 px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-orange-400 font-bold text-slate-800">
+            </div>
+            <div>
+                <label class="text-xs font-extrabold uppercase text-slate-600 ml-1">Senha</label>
+                <input type="password" id="campo-senha" placeholder="Digite sua senha..." class="w-full mt-1 px-4 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-orange-400 font-bold text-slate-800">
+            </div>
+            <button type="submit" class="w-full py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-extrabold rounded-xl shadow-lg hover:opacity-95 transition uppercase tracking-wider text-xs mt-2">
+                Entrar no Sistema
+            </button>
+        </form>
+        <p id="msg-erro" class="text-xs font-bold text-red-500 hidden">Login ou senha incorretos.</p>
+    </div>
+
+    <!-- CONTEÚDO DO RELATÓRIO (OCULTO ATÉ O LOGIN) -->
+    <div id="conteudo-relatorio" class="max-w-6xl w-full mx-auto space-y-6 hidden">
 
         <!-- CABEÇALHO -->
         <header class="header-gradient rounded-2xl p-6 text-white shadow-xl flex flex-col md:flex-row justify-between items-center gap-6 relative overflow-hidden">
@@ -80,8 +111,8 @@
                 <div class="flex items-center gap-2">
                     <span class="inline-block px-3.5 py-1 badge-orange rounded-full text-xs font-black text-white uppercase tracking-wider">Relatório de Performance</span>
                     
-                    <!-- SELETOR DE CLIENTES -->
-                    <select id="seletor-cliente-menu" onchange="trocarCliente(this.value)" class="bg-slate-800 text-white text-xs font-bold py-1 px-2.5 rounded-full border border-orange-400/50 focus:outline-none cursor-pointer hover:bg-slate-700 transition">
+                    <!-- SELETOR DIREÇÃO (Visível apenas para o login Diretoria) -->
+                    <select id="seletor-diretoria" onchange="trocarClienteDiretoria(this.value)" class="bg-slate-800 text-white text-xs font-bold py-1 px-2.5 rounded-full border border-orange-400/50 focus:outline-none cursor-pointer hover:bg-slate-700 transition hidden">
                         <option value="anela-acessorios">Anela Acessórios</option>
                         <option value="niara-joias">Niara Joias</option>
                         <option value="ulli-joias">Ulli Joias</option>
@@ -206,75 +237,101 @@
 
     </div>
 
-    <!-- SCRIPT DINÂMICO -->
+    <!-- SCRIPT DE AUTENTICAÇÃO E RENDERIZAÇÃO -->
     <script>
+        // BANCO DE CREDENCIAIS
+        const credenciais = {
+            "diretoria S.O.S": { senha: "123456", arquivo: "anela-acessorios.json", eDiretoria: true },
+            "Anela": { senha: "12345", arquivo: "anela-acessorios.json", eDiretoria: false },
+            "Niara": { senha: "12346789", arquivo: "niara-joias.json", eDiretoria: false },
+            "ulli": { senha: "987654321", arquivo: "ulli-joias.json", eDiretoria: false }
+        };
+
         let chartInstance = null;
         let discountChartInstance = null;
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const clienteParam = urlParams.get('cliente') || 'anela-acessorios';
+        function autenticarUsuario(event) {
+            event.preventDefault();
+            const login = document.getElementById('campo-login').value.trim();
+            const senha = document.getElementById('campo-senha').value.trim();
+            const msgErro = document.getElementById('msg-erro');
 
-        // Atualiza o select com o cliente atual da URL
-        const seletor = document.getElementById('seletor-cliente-menu');
-        if (seletor) seletor.value = clienteParam;
+            const usuario = credenciais[login];
 
-        function trocarCliente(novoCliente) {
-            window.location.href = `?cliente=${novoCliente}`;
+            if (usuario && usuario.senha === senha) {
+                msgErro.classList.add('hidden');
+                document.getElementById('modal-login').classList.add('hidden');
+                document.getElementById('conteudo-relatorio').classList.remove('hidden');
+
+                if (usuario.eDiretoria) {
+                    document.getElementById('seletor-diretoria').classList.remove('hidden');
+                }
+
+                carregarDadosCliente(usuario.arquivo);
+            } else {
+                msgErro.classList.remove('hidden');
+            }
         }
 
-        fetch(`dados/${clienteParam}.json`)
-            .then(response => {
-                if (!response.ok) throw new Error("Cliente não encontrado");
-                return response.json();
-            })
-            .then(data => {
-                document.getElementById('client-name').textContent = data.cliente;
-                document.getElementById('client-period').textContent = data.periodo;
-                document.getElementById('kpi-pecas').innerHTML = `${data.kpis.totalPecas} <span class="text-xs font-bold text-slate-500">itens</span>`;
-                document.getElementById('kpi-servicos').innerHTML = `${data.kpis.totalServicos} <span class="text-xs font-bold text-slate-500">execuções</span>`;
-                document.getElementById('kpi-investimento').textContent = data.kpis.investimentoTotal;
-                document.getElementById('kpi-media').textContent = data.kpis.mediaMensal;
+        function trocarClienteDiretoria(arquivoJson) {
+            carregarDadosCliente(arquivoJson);
+        }
 
-                const tbody = document.getElementById('tabela-body');
-                tbody.innerHTML = '';
-                data.tabela.forEach(item => {
-                    const tr = document.createElement('tr');
-                    tr.className = 'hover:bg-orange-50/50 transition';
-                    tr.innerHTML = `
-                        <td class="py-3 px-4 font-bold text-slate-900">${item.servico}</td>
-                        <td class="py-3 px-4 text-right font-extrabold">${item.qtd}</td>
-                        <td class="py-3 px-4 text-right">${item.valor}</td>
-                        <td class="py-3 px-4 text-right font-black text-blue-600">${item.part}</td>
-                    `;
-                    tbody.appendChild(tr);
+        function carregarDadosCliente(nomeArquivo) {
+            fetch(`dados/${nomeArquivo}`)
+                .then(response => {
+                    if (!response.ok) throw new Error("Arquivo não encontrado");
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('client-name').textContent = data.cliente;
+                    document.getElementById('client-period').textContent = data.periodo;
+                    document.getElementById('kpi-pecas').innerHTML = `${data.kpis.totalPecas} <span class="text-xs font-bold text-slate-500">itens</span>`;
+                    document.getElementById('kpi-servicos').innerHTML = `${data.kpis.totalServicos} <span class="text-xs font-bold text-slate-500">execuções</span>`;
+                    document.getElementById('kpi-investimento').textContent = data.kpis.investimentoTotal;
+                    document.getElementById('kpi-media').textContent = data.kpis.mediaMensal;
+
+                    const tbody = document.getElementById('tabela-body');
+                    tbody.innerHTML = '';
+                    data.tabela.forEach(item => {
+                        const tr = document.createElement('tr');
+                        tr.className = 'hover:bg-orange-50/50 transition';
+                        tr.innerHTML = `
+                            <td class="py-3 px-4 font-bold text-slate-900">${item.servico}</td>
+                            <td class="py-3 px-4 text-right font-extrabold">${item.qtd}</td>
+                            <td class="py-3 px-4 text-right">${item.valor}</td>
+                            <td class="py-3 px-4 text-right font-black text-blue-600">${item.part}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+
+                    document.getElementById('total-qtd-servicos').textContent = data.kpis.totalServicos;
+                    document.getElementById('total-valor-servicos').textContent = data.kpis.investimentoTotal;
+
+                    renderChart(data.mensal);
+
+                    const secaoDescontos = document.getElementById('secao-descontos');
+                    if (data.mensalDesconto && data.resumoDesconto) {
+                        secaoDescontos.classList.remove('hidden');
+                        document.getElementById('desc-bruto').textContent = data.resumoDesconto.valorBruto;
+                        document.getElementById('desc-liquido').textContent = data.resumoDesconto.valorLiquido;
+                        document.getElementById('desc-economia').textContent = data.resumoDesconto.economiaTotal;
+                        
+                        const legendaTexto = data.resumoDesconto.legenda || "Desconto aplicado";
+                        document.getElementById('desc-legenda-card').textContent = legendaTexto;
+
+                        const rotulosGrafico = data.labelsDesconto || ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'];
+
+                        renderDiscountChart(data.mensal, data.mensalDesconto, rotulosGrafico);
+                    } else {
+                        secaoDescontos.classList.add('hidden');
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro:", error);
+                    document.getElementById('client-name').textContent = "Erro ao carregar dados.";
                 });
-
-                document.getElementById('total-qtd-servicos').textContent = data.kpis.totalServicos;
-                document.getElementById('total-valor-servicos').textContent = data.kpis.investimentoTotal;
-
-                renderChart(data.mensal);
-
-                // SEÇÃO DE DESCONTOS LÊ DINAMICAMENTE O JSON DO CLIENTE
-                if (data.mensalDesconto && data.resumoDesconto) {
-                    document.getElementById('secao-descontos').classList.remove('hidden');
-                    document.getElementById('desc-bruto').textContent = data.resumoDesconto.valorBruto;
-                    document.getElementById('desc-liquido').textContent = data.resumoDesconto.valorLiquido;
-                    document.getElementById('desc-economia').textContent = data.resumoDesconto.economiaTotal;
-                    
-                    // Pega a legenda do JSON ou coloca um texto padrão
-                    const legendaTexto = data.resumoDesconto.legenda || "Desconto aplicado";
-                    document.getElementById('desc-legenda-card').textContent = legendaTexto;
-
-                    // Pega os rótulos do gráfico do JSON ou usa o padrão mensal
-                    const rotulosGrafico = data.labelsDesconto || ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'];
-
-                    renderDiscountChart(data.mensal, data.mensalDesconto, rotulosGrafico);
-                }
-            })
-            .catch(error => {
-                console.error("Erro:", error);
-                document.getElementById('client-name').textContent = "Erro ao carregar dados.";
-            });
+        }
 
         function renderChart(dadosMensais) {
             if (chartInstance) chartInstance.destroy();

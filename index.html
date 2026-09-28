@@ -282,7 +282,7 @@
 
     <!-- SCRIPT DE AUTENTICAÇÃO E RENDERIZAÇÃO -->
     <script>
-        // BANCO DE CREDENCIAIS (SENHA NIARA AJUSTADA PARA 123456789)
+        // BANCO DE CREDENCIAIS
         const credenciais = {
             "diretoria S.O.S": { nome: "Diretoria S.O.S", senha: "123456", arquivo: "anela-acessorios.json", eDiretoria: true },
             "Anela": { nome: "Anela Acessórios", senha: "12345", arquivo: "anela-acessorios.json", eDiretoria: false },
@@ -402,7 +402,7 @@
                     document.getElementById('total-qtd-servicos').textContent = data.kpis.totalServicos;
                     document.getElementById('total-valor-servicos').textContent = data.kpis.investimentoTotal;
 
-                    const rotulosGrafico = data.labelsDesconto || ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+                    const rotulosGrafico = data.labelsDesconto || ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set'];
                     
                     renderChart(data.mensal, rotulosGrafico);
 
@@ -442,9 +442,9 @@
             };
 
             const labelsLongas = rotulos ? rotulos.map(r => {
-                const chave3Letras = r.substring(0, 3);
-                return mapaMeses[chave3Letras] || r;
-            }) : ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+                const chave = r.substring(0, 3);
+                return mapaMeses[chave] || r;
+            }) : ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro'];
 
             chartInstance = new Chart(ctx, {
                 type: 'bar',

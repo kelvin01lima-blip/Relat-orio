@@ -1,22 +1,22 @@
 {
   "cliente": "Niara Joias",
-  "periodo": "Jan a Jul/2026",
+  "periodo": "Jan a Set/2026",
   "kpis": {
-    "totalPecas": "22.150",
-    "totalServicos": "75.431",
-    "investimentoTotal": "R$ 44.652,06",
-    "mediaMensal": "R$ 6.378,86"
+    "totalPecas": "23.927",
+    "totalServicos": "79.812",
+    "investimentoTotal": "R$ 47.670,25",
+    "mediaMensal": "R$ 5.296,69"
   },
-  "mensal": [166.60, 0.00, 3573.32, 4322.48, 14326.49, 16801.90, 5461.27],
-  "mensalDesconto": [154.94, 0.00, 2965.86, 3587.66, 10744.87, 11761.33, 3822.89],
+  "mensal": [166.60, 0.00, 3573.32, 4322.48, 14326.49, 16801.90, 5461.27, 780.50, 2237.69],
+  "mensalDesconto": [154.94, 0.00, 2965.86, 3587.66, 10744.87, 11761.33, 3822.89, 546.35, 1566.38],
   "politicaDesconto": {
-    "descricao": "Desconto de 7% (Jan/Fev), 17% (Mar/Abr), 25% (Mai) e 30% (Jun/Jul)"
+    "descricao": "Desconto de 7% (Jan/Fev), 17% (Mar/Abr), 25% (Mai) e 30% (Jun a Set)"
   },
   "resumoDesconto": {
-    "valorBruto": "R$ 44.652,06",
-    "valorLiquido": "R$ 33.037,55",
-    "economiaTotal": "R$ 11.614,51",
-    "legenda": "Jan/Fev (7%), Mar/Abr (17%), Mai (25%), Jun/Jul (30%)"
+    "valorBruto": "R$ 47.670,25",
+    "valorLiquido": "R$ 35.150,28",
+    "economiaTotal": "R$ 12.519,97",
+    "legenda": "Jan/Fev (7%), Mar/Abr (17%), Mai (25%), Jun a Set (30%)"
   },
   "labelsDesconto": [
     "Jan (-7%)",
@@ -25,20 +25,22 @@
     "Abr (-17%)",
     "Mai (-25%)",
     "Jun (-30%)",
-    "Jul (-30%)"
+    "Jul (-30%)",
+    "Ago (-30%)",
+    "Set (-30%)"
   ],
   "tabela": [
-    { "servico": "Inspeção Clube S.O.S", "qtd": "9.423", "valor": "R$ 12.083,38", "part": "27,1%" },
-    { "servico": "Encarte Clube S.O.S", "qtd": "9.332", "valor": "R$ 9.400,20", "part": "21,1%" },
-    { "servico": "Cadastro Externo", "qtd": "1.602", "valor": "R$ 6.742,46", "part": "15,1%" },
-    { "servico": "Fotografia Clube S.O.S", "qtd": "1.586", "valor": "R$ 5.492,20", "part": "12,3%" },
-    { "servico": "Emissão e Impressão de Etiquetas", "qtd": "8.474", "valor": "R$ 4.197,29", "part": "9,4%" },
-    { "servico": "Montagem", "qtd": "3.925", "valor": "R$ 3.974,03", "part": "8,9%" },
-    { "servico": "Inspeção Corrente", "qtd": "1.956", "valor": "R$ 1.250,26", "part": "2,8%" },
-    { "servico": "Cravação Clube S.O.S", "qtd": "416", "valor": "R$ 535,82", "part": "1,2%" },
+    { "servico": "Inspeção Clube S.O.S", "qtd": "11.200", "valor": "R$ 13.327,28", "part": "28,0%" },
+    { "servico": "Encarte Clube S.O.S", "qtd": "10.421", "valor": "R$ 9.999,15", "part": "21,0%" },
+    { "servico": "Cadastro Externo", "qtd": "1.811", "valor": "R$ 7.223,16", "part": "15,2%" },
+    { "servico": "Fotografia Clube S.O.S", "qtd": "1.795", "valor": "R$ 5.887,21", "part": "12,4%" },
+    { "servico": "Emissão e Impressão de Etiquetas", "qtd": "9.563", "valor": "R$ 4.491,32", "part": "9,4%" },
+    { "servico": "Montagem", "qtd": "3.925", "valor": "R$ 3.974,03", "part": "8,3%" },
+    { "servico": "Inspeção Corrente", "qtd": "1.956", "valor": "R$ 1.250,26", "part": "2,6%" },
+    { "servico": "Cravação Clube S.O.S", "qtd": "424", "valor": "R$ 541,42", "part": "1,1%" },
     { "servico": "Combo Completo 2025", "qtd": "140", "valor": "R$ 312,56", "part": "0,7%" },
     { "servico": "Cadastro Reposição Clube S.O.S", "qtd": "362", "valor": "R$ 312,56", "part": "0,7%" },
-    { "servico": "Inspeção Veneziana", "qtd": "438", "valor": "R$ 281,31", "part": "0,6%" },
+    { "servico": "Inspeção Veneziana", "qtd": "438", "valor": "R$ 281,31", "part": "0,5%" },
     { "servico": "Caixa G", "qtd": "2", "valor": "R$ 69,99", "part": "0,1%" }
   ]
 }

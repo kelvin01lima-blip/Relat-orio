@@ -282,23 +282,16 @@
 
     <!-- SCRIPT DE AUTENTICAÇÃO E RENDERIZAÇÃO -->
     <script>
-        // BANCO DE CREDENCIAIS
+        // BANCO DE CREDENCIAIS (SENHA NIARA AJUSTADA PARA 123456789)
         const credenciais = {
             "diretoria S.O.S": { nome: "Diretoria S.O.S", senha: "123456", arquivo: "anela-acessorios.json", eDiretoria: true },
             "Anela": { nome: "Anela Acessórios", senha: "12345", arquivo: "anela-acessorios.json", eDiretoria: false },
-            "Niara": { nome: "Niara Joias", senha: "12346789", arquivo: "niara-joias.json", eDiretoria: false },
+            "Niara": { nome: "Niara Joias", senha: "123456789", arquivo: "niara-joias.json", eDiretoria: false },
             "ulli": { nome: "Ulli Joias", senha: "987654321", arquivo: "ulli-joias.json", eDiretoria: false }
         };
 
         let chartInstance = null;
         let discountChartInstance = null;
-
-        // MAPEAMENTO COMPLETO ATÉ DEZEMBRO
-        const mapaMesesCompleto = {
-            'Jan': 'Janeiro', 'Fev': 'Fevereiro', 'Mar': 'Março', 'Abr': 'Abril',
-            'Mai': 'Maio', 'Jun': 'Junho', 'Jul': 'Julho', 'Ago': 'Agosto',
-            'Set': 'Setembro', 'Out': 'Outubro', 'Nov': 'Novembro', 'Dez': 'Dezembro'
-        };
 
         document.addEventListener('DOMContentLoaded', () => {
             const usuarioSalvo = sessionStorage.getItem('usuario_logado');
@@ -409,7 +402,6 @@
                     document.getElementById('total-qtd-servicos').textContent = data.kpis.totalServicos;
                     document.getElementById('total-valor-servicos').textContent = data.kpis.investimentoTotal;
 
-                    // Rótulos dinâmicos vindos do JSON (labelsDesconto)
                     const rotulosGrafico = data.labelsDesconto || ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
                     
                     renderChart(data.mensal, rotulosGrafico);
@@ -443,8 +435,16 @@
             gradientBlue.addColorStop(0, '#2563eb');
             gradientBlue.addColorStop(1, '#3b82f6');
 
-            // Garante a conversão para nomes completos de Jan a Dez
-            const labelsLongas = rotulos.map(r => mapaMesesCompleto[r] || r);
+            const mapaMeses = {
+                'Jan': 'Janeiro', 'Fev': 'Fevereiro', 'Mar': 'Março', 'Abr': 'Abril',
+                'Mai': 'Maio', 'Jun': 'Junho', 'Jul': 'Julho', 'Ago': 'Agosto',
+                'Set': 'Setembro', 'Out': 'Outubro', 'Nov': 'Novembro', 'Dez': 'Dezembro'
+            };
+
+            const labelsLongas = rotulos ? rotulos.map(r => {
+                const chave3Letras = r.substring(0, 3);
+                return mapaMeses[chave3Letras] || r;
+            }) : ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
 
             chartInstance = new Chart(ctx, {
                 type: 'bar',

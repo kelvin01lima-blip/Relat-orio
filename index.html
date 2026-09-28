@@ -142,14 +142,14 @@
 
             <div class="text-center md:text-right z-10 flex flex-col items-center md:items-end gap-2">
                 <div class="flex flex-wrap items-center justify-center md:justify-end gap-2">
-                    <!-- BOTÃO VER SENHAS (Visível apenas para o login Diretoria) -->
+                    <!-- BOTÃO VER SENHAS -->
                     <button id="btn-ver-senhas" onclick="abrirModalSenhas()" class="bg-amber-500 hover:bg-amber-600 text-slate-900 text-xs font-black py-1 px-3 rounded-full shadow-md transition hidden">
                         🔑 Chaves de Acesso
                     </button>
 
                     <span class="inline-block px-3.5 py-1 badge-orange rounded-full text-xs font-black text-white uppercase tracking-wider">Relatório de Performance</span>
                     
-                    <!-- SELETOR DIREÇÃO (Visível apenas para o login Diretoria) -->
+                    <!-- SELETOR DIREÇÃO -->
                     <select id="seletor-diretoria" onchange="trocarClienteDiretoria(this.value)" class="bg-slate-800 text-white text-xs font-bold py-1 px-2.5 rounded-full border border-orange-400/50 focus:outline-none cursor-pointer hover:bg-slate-700 transition hidden">
                         <option value="anela-acessorios.json">Anela Acessórios</option>
                         <option value="niara-joias.json">Niara Joias</option>
@@ -293,7 +293,13 @@
         let chartInstance = null;
         let discountChartInstance = null;
 
-        // VERIFICA SE JÁ EXISTE UMA SESSÃO ATIVA AO CARREGAR A PÁGINA (OU F5)
+        // MAPEAMENTO COMPLETO ATÉ DEZEMBRO
+        const mapaMesesCompleto = {
+            'Jan': 'Janeiro', 'Fev': 'Fevereiro', 'Mar': 'Março', 'Abr': 'Abril',
+            'Mai': 'Maio', 'Jun': 'Junho', 'Jul': 'Julho', 'Ago': 'Agosto',
+            'Set': 'Setembro', 'Out': 'Outubro', 'Nov': 'Novembro', 'Dez': 'Dezembro'
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
             const usuarioSalvo = sessionStorage.getItem('usuario_logado');
             const arquivoSalvo = sessionStorage.getItem('arquivo_atual');
@@ -403,7 +409,10 @@
                     document.getElementById('total-qtd-servicos').textContent = data.kpis.totalServicos;
                     document.getElementById('total-valor-servicos').textContent = data.kpis.investimentoTotal;
 
-                    renderChart(data.mensal);
+                    // Rótulos dinâmicos vindos do JSON (labelsDesconto)
+                    const rotulosGrafico = data.labelsDesconto || ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+                    
+                    renderChart(data.mensal, rotulosGrafico);
 
                     const secaoDescontos = document.getElementById('secao-descontos');
                     if (data.mensalDesconto && data.resumoDesconto) {
@@ -414,8 +423,6 @@
                         
                         const legendaTexto = data.resumoDesconto.legenda || "Desconto aplicado";
                         document.getElementById('desc-legenda-card').textContent = legendaTexto;
-
-                        const rotulosGrafico = data.labelsDesconto || ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul'];
 
                         renderDiscountChart(data.mensal, data.mensalDesconto, rotulosGrafico);
                     } else {
@@ -428,7 +435,7 @@
                 });
         }
 
-        function renderChart(dadosMensais) {
+        function renderChart(dadosMensais, rotulos) {
             if (chartInstance) chartInstance.destroy();
 
             const ctx = document.getElementById('monthlyChart').getContext('2d');
@@ -436,10 +443,13 @@
             gradientBlue.addColorStop(0, '#2563eb');
             gradientBlue.addColorStop(1, '#3b82f6');
 
+            // Garante a conversão para nomes completos de Jan a Dez
+            const labelsLongas = rotulos.map(r => mapaMesesCompleto[r] || r);
+
             chartInstance = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho'],
+                    labels: labelsLongas,
                     datasets: [{
                         label: 'Investimento (R$)',
                         data: dadosMensais,
